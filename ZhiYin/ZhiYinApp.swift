@@ -10,7 +10,15 @@ import SwiftUI
 // TODO: 动态加载
 var imageSet = [
     ImageSetInfo(id: 0, name: "zhiyin", num: 17, desp: "只因铁山靠⛰️"),
-    ImageSetInfo(id: 1, name: "zhiyinbas", num: 17, desp: "只因篮球🏀")
+    ImageSetInfo(id: 1, name: "zhiyinbas", num: 17, desp: "只因篮球🏀"),
+    ImageSetInfo(id: 2, name: "cat_", num: 20, desp: "猫砸键盘🐱"),
+    ImageSetInfo(id: 3, name: "pink_cat", num: 14, desp: "猫砸🐱"),
+    ImageSetInfo(id: 4, name: "ship", num: 18, desp: "跳跃的🐑"),
+    ImageSetInfo(id: 5, name: "big_mouse_frog", num: 22, desp: "大嘴🐸"),
+    ImageSetInfo(id: 6, name: "kakashi", num: 20, desp: "卡卡西"),
+    ImageSetInfo(id: 7, name: "karby", num: 8, desp: "星之卡比"),
+    ImageSetInfo(id: 8, name: "rabit_run", num: 17, desp: "奔跑的🐰"),
+    ImageSetInfo(id: 9, name: "xiaolan_turn", num: 23, desp: "小蓝转圈圈"),
 ]
 
 @main
