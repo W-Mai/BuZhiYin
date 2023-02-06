@@ -7,11 +7,18 @@
 
 import SwiftUI
 
+enum NeedInvert: Int {
+    case no =  0
+    case yes = 1
+}
+
 struct ImageSetInfo: Identifiable {
-    var id:   Int
-    var name: String
-    var num:  Int
-    var desp: String
+    var id:     Int
+    var light:  NeedInvert = .no
+    var dark:   NeedInvert = .no
+    var name:   String
+    var num:    Int
+    var desp:   String
 }
 
 struct SettingsView: View {
@@ -58,7 +65,7 @@ struct SettingsView: View {
                     Text("🐔🫵🏻🌞🈚️")
                         .font(.system(size: 100)).multilineTextAlignment(.center)
                 }.onTapGesture {
-                    NSWorkspace.shared.open(URL(string:"https://github.com/Eilgnaw/ZhiYin")!)
+                    NSWorkspace.shared.open(URL(string:"https://github.com/W-Mai/ZhiYin")!)
                 }
                 
             }.frame(width: 300, height: 300)

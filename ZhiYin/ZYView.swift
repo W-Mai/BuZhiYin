@@ -8,17 +8,23 @@
 
 import SwiftUI
 
+
+
 struct AutoInvertImage: View {
     @Environment(\.colorScheme) var currentMode
     @AppStorage("ThemeMode") private var themeMode = 0
     var name: String
+    var light: NeedInvert
+    var dark: NeedInvert
     
     var body: some View {
         VStack {
-            if themeMode == 1 || themeMode == 2 && currentMode == .dark {
-                Image(name).resizable().colorInvert()
-            } else {
+            let mode: ColorScheme = themeMode == 2 ? currentMode : themeMode == 0 ? .light : .dark
+            
+            if mode == .light && light == .no || mode == .dark && dark == .no {
                 Image(name).resizable()
+            } else  {
+                Image(name).resizable().colorInvert()
             }
         }
     }
@@ -48,7 +54,10 @@ struct ZYView: View {
         let timer = Timer.publish(every: TimeInterval((( speedProportional ? 1.0001 - Double(cpuInfo.cuse) : Double(cpuInfo.cuse)) / 5 * (1.1 - playSpeed))),
                                   on: .main, in: .common).autoconnect()
         VStack {
-            AutoInvertImage(name: imageName).frame(width: width, height: height)
+            AutoInvertImage(name: imageName,
+                            light: imageSet[currentImageSet].light,
+                            dark: imageSet[currentImageSet].dark)
+            .frame(width: width, height: height)
         }.onReceive(timer) { _ in
             if imageIndex == 0 {
                 direction = 1
