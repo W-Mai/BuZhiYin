@@ -13,18 +13,18 @@ import SwiftUI
 struct AutoInvertImage: View {
     @Environment(\.colorScheme) var currentMode
     @AppStorage("ThemeMode") private var themeMode = 0
-    var name: String
-    var light: NeedInvert
-    var dark: NeedInvert
+    var data: CGImage?
+    var light: Bool
+    var dark: Bool
     
     var body: some View {
         VStack {
             let mode: ColorScheme = themeMode == 2 ? currentMode : themeMode == 0 ? .light : .dark
             
-            if mode == .light && light == .no || mode == .dark && dark == .no {
-                Image(name).resizable()
+            if mode == .light && light == false || mode == .dark && dark == false {
+                Image(data!, scale: 1, label: Text("ZhiyinView")).resizable()
             } else  {
-                Image(name).resizable().colorInvert()
+                Image(data!, scale: 1, label: Text("ZhiyinView")).resizable().colorInvert()
             }
         }
     }
@@ -33,9 +33,11 @@ struct AutoInvertImage: View {
 struct ZYView: View {
     @StateObject var cpuInfo = CpuUsage()
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
     @AppStorage("AutoReverse") private var autoReverse = true
     @AppStorage("SpeedProportional") private var speedProportional = true
-    @AppStorage("CurrentImageSet") private var currentImageSet = 0
+    @AppStorage("CurrentImageSetString") private var currentImageSet: String?
     @AppStorage("PlaySpeed") private var playSpeed = 0.5
     @State var imageName = "ZhiyinDefault"
     
@@ -45,6 +47,23 @@ struct ZYView: View {
     @State var width: CGFloat
     @State var height: CGFloat
     
+    var entity: ZhiyinEntity? {
+        get {
+            let fetch_req: NSFetchRequest<ZhiyinEntity> = ZhiyinEntity.fetchRequest()
+            fetch_req.predicate = NSPredicate(format: "id=%@", currentImageSet!)
+            
+            guard let res = try? viewContext.fetch(fetch_req) else {
+                return nil
+            }
+            
+            if res.count != 1 {
+                return nil
+            }
+            
+            return res.first!
+        }
+    }
+    
     init(width:CGFloat, height: CGFloat ) {
         self.width = width
         self.height = height
@@ -53,16 +72,22 @@ struct ZYView: View {
     var body: some View {
         let timer = Timer.publish(every: TimeInterval((( speedProportional ? 1.0001 - Double(cpuInfo.cuse) : Double(cpuInfo.cuse)) / 5 * (1.1 - playSpeed))),
                                   on: .main, in: .common).autoconnect()
+        
         VStack {
-            AutoInvertImage(name: imageName,
-                            light: imageSet[currentImageSet].light,
-                            dark: imageSet[currentImageSet].dark)
-            .frame(width: width, height: height)
+            if entity != nil {
+                AutoInvertImage(data: entity!.getImage(imageIndex),
+                                light: entity!.light_invert,
+                                dark: entity!.dark_invert)
+                .frame(width: width, height: height)
+            }
         }.onReceive(timer) { _ in
+            guard let frame_num = entity?.frame_num else {
+                return
+            }
             if imageIndex == 0 {
                 direction = 1
             }
-            if imageIndex >= imageSet[currentImageSet].num - 1 {
+            if imageIndex >= frame_num - 1 {
                 if autoReverse {
                     direction = -1
                 } else {
@@ -72,7 +97,9 @@ struct ZYView: View {
             }
             
             imageIndex += direction
-            imageName = "\(imageSet[currentImageSet].name)\(imageIndex)"
+        }.onChange(of: currentImageSet!) { _ in
+            imageIndex = 0
+            direction = 1
         }
     }
 }

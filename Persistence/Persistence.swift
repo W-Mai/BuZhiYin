@@ -19,7 +19,7 @@ struct PersistenceController {
             let newItem = ZhiyinEntity(context: viewContext)
             _ = newItem.setGIF(data: (try? Data(contentsOf: Bundle.main.url(forResource: "txbb", withExtension: "gif")!))!)
             newItem.id = UUID()
-            newItem.name = UUID().uuidString
+            newItem.name = "基尼钛镁\(UUID().uuidString)"
             newItem.desc = UUID().uuidString
         }
         do {

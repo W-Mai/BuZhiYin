@@ -7,26 +7,18 @@
 
 import SwiftUI
 
-enum NeedInvert: Int {
-    case no =  0
-    case yes = 1
-}
-
-struct ImageSetInfo: Identifiable {
-    var id:     Int
-    var light:  NeedInvert = .no
-    var dark:   NeedInvert = .no
-    var name:   String
-    var num:    Int
-    var desp:   String
-}
-
 struct SettingsView: View {
     @AppStorage("AutoReverse") private var autoReverse = true
     @AppStorage("SpeedProportional") private var speedProportional = true
-    @AppStorage("CurrentImageSet") private var currentImageSet = 0
+    @AppStorage("CurrentImageSetString") private var currentImageSet: String?
     @AppStorage("ThemeMode") private var themeMode = 0
     @AppStorage("PlaySpeed") private var playSpeed = 0.5
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \ZhiyinEntity.id, ascending: true)],
+        animation: .default)
+    private var items: FetchedResults<ZhiyinEntity>
     
     var body: some View {
         TabView {
@@ -46,8 +38,8 @@ struct SettingsView: View {
                     Toggle("速度正比于CPU占用", isOn: $speedProportional).toggleStyle(.switch)
                     HStack {
                         Picker(selection: $currentImageSet, label: Text("图集")) {
-                            ForEach(imageSet) {item in
-                                Text(item.desp).tag(item.id)
+                            ForEach(items) {item in
+                                Text(item.name!).tag(item.id?.uuidString)
                             }
                         }
                     }.frame(width: 200)

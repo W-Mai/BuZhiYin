@@ -7,16 +7,15 @@
 
 import SwiftUI
 
-// TODO: 动态加载
-var imageSet = [ImageSetInfo]()
-
 @main
 struct ZhiYinApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    let persistenceController = PersistenceController.preview
     
     var body: some Scene {
         Settings {
             SettingsView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
@@ -24,6 +23,7 @@ struct ZhiYinApp: App {
 import AppKit
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBarItem: NSStatusItem?
+    let persistenceController = PersistenceController.preview
     
     @objc func exitApp() {
         NSApplication.shared.terminate(nil)
@@ -48,18 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem(title: "设置", action: #selector(openSettings), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "退出", action: #selector(exitApp), keyEquivalent: ""))
         
-        let persistenceController = PersistenceController.preview
-        let fetchReq = ZhiyinEntity.fetchRequest()
-        
-        guard let res = try? persistenceController.container.viewContext.fetch(fetchReq) else {
-            return
-        }
-        for z in res {
-            print(z.frame_num)
-            imageSet.append(ImageSetInfo(id: z.id!.hashValue, name: z.name!, num: Int(z.frame_num), desp: z.desc!))
-        }
-        
-        let contentView = ZYView(width: 22, height: 22)
+        let contentView = ZYView(width: 22, height: 22).environment(\.managedObjectContext, persistenceController.container.viewContext)
         let mainView = NSHostingView(rootView: contentView)
         mainView.frame = NSRect(x: 0, y: 0, width: 22, height: 22)
         statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
