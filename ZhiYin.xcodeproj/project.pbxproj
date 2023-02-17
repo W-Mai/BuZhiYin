@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4530F018299E9D910056556E /* ZhiYins.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4530F016299E9D910056556E /* ZhiYins.xcdatamodeld */; };
 		458BE93B299F4CB300CC2D4B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE93A299F4CB300CC2D4B /* Persistence.swift */; };
+		458BE93D299F67DF00CC2D4B /* txbb.gif in Resources */ = {isa = PBXBuildFile; fileRef = 458BE93C299F67DF00CC2D4B /* txbb.gif */; };
 		45E8EA262974541E000D163E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EA252974541E000D163E /* SettingsView.swift */; };
 		D828C8DA296C25930017BF51 /* ZhiYinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D828C8D9296C25930017BF51 /* ZhiYinApp.swift */; };
 		D828C8DE296C25940017BF51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D828C8DD296C25940017BF51 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		4530F017299E9D910056556E /* ZhiYins.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ZhiYins.xcdatamodel; sourceTree = "<group>"; };
 		458BE93A299F4CB300CC2D4B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		458BE93C299F67DF00CC2D4B /* txbb.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = txbb.gif; path = "refs/img-srcs/origin/txbb.gif"; sourceTree = SOURCE_ROOT; };
 		45E8EA252974541E000D163E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D828C8D6296C25930017BF51 /* ZhiYin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiYin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D828C8D9296C25930017BF51 /* ZhiYinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhiYinApp.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 		D828C8D8296C25930017BF51 /* ZhiYin */ = {
 			isa = PBXGroup;
 			children = (
+				458BE93C299F67DF00CC2D4B /* txbb.gif */,
 				45E8EA252974541E000D163E /* SettingsView.swift */,
 				D83C2A19296C863500697CA3 /* CpuUsage.swift */,
 				D828C8D9296C25930017BF51 /* ZhiYinApp.swift */,
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D828C8E1296C25940017BF51 /* Preview Assets.xcassets in Resources */,
+				458BE93D299F67DF00CC2D4B /* txbb.gif in Resources */,
 				D828C8DE296C25940017BF51 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

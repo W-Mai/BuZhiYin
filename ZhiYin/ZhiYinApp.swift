@@ -55,9 +55,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         for z in res {
+            print(z.frame_num)
             imageSet.append(ImageSetInfo(id: z.id!.hashValue, name: z.name!, num: Int(z.frame_num), desp: z.desc!))
         }
-        
         
         let contentView = ZYView(width: 22, height: 22)
         let mainView = NSHostingView(rootView: contentView)
