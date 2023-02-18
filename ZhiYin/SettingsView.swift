@@ -25,9 +25,8 @@ struct SettingsView: View {
             Form {
                 List {
                     HStack(alignment: .center) {
-                        ZYView(width: 100, height: 100)
-                    }.padding(20)
-                        .frame(maxWidth: .infinity)
+                        ZYViewAuto(width: 100, height: 100)
+                    }.padding(20).frame(maxWidth: .infinity)
                     
                     Picker(selection: $themeMode, label: Text("主题")) {
                         Text("明亮").tag(0)
@@ -37,16 +36,16 @@ struct SettingsView: View {
                     Toggle("自动反转播放", isOn: $autoReverse).toggleStyle(.switch)
                     Toggle("速度正比于CPU占用", isOn: $speedProportional).toggleStyle(.switch)
                     HStack {
+                        Text("只因速")
+                        Slider(value: $playSpeed)
+                    }
+                    HStack {
                         Picker(selection: $currentImageSet, label: Text("图集")) {
                             ForEach(items) {item in
                                 Text(item.name!).tag(item.id?.uuidString)
                             }
                         }
                     }.frame(width: 200)
-                    HStack {
-                        Text("只因速")
-                        Slider(value: $playSpeed)
-                    }
                 }
             }
             .frame(width: 300, height: 350)

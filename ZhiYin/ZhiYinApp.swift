@@ -48,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem(title: "设置", action: #selector(openSettings), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "退出", action: #selector(exitApp), keyEquivalent: ""))
         
-        let contentView = ZYView(width: 22, height: 22).environment(\.managedObjectContext, persistenceController.container.viewContext)
+        let contentView = ZYViewAuto(width: 22, height: 22).environment(\.managedObjectContext, persistenceController.container.viewContext)
         let mainView = NSHostingView(rootView: contentView)
         mainView.frame = NSRect(x: 0, y: 0, width: 22, height: 22)
         statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)

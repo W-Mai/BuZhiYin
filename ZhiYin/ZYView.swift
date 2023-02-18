@@ -29,6 +29,55 @@ struct AutoInvertImage: View {
 }
 
 struct ZYView: View {
+    var entity: ZhiyinEntity?
+    var factor: Float
+    var autoReverse = true
+    var speedProportional = true
+    var playSpeed = 0.5
+    
+    @State var direction = 1
+    @State var imageIndex = 0
+    
+    var body: some View {
+        let timer = Timer.publish(every: TimeInterval(factor),
+                                  on: .main,
+                                  in: .common).autoconnect()
+        
+        VStack {
+            if entity != nil {
+                AutoInvertImage(
+                    data: Image(entity!.getImage(imageIndex)!, scale: 1, label: Text("ZhiyinView")),
+                    light: entity!.light_invert,
+                    dark: entity!.dark_invert
+                )
+            } else {
+                AutoInvertImage(data: Image("ZhiyinDefault"), light: false, dark: false)
+            }
+        }.onReceive(timer) { _ in
+            guard let frame_num = entity?.frame_num else {
+                return
+            }
+            if imageIndex == 0 {
+                direction = 1
+            }
+            if imageIndex >= frame_num - 1 {
+                if autoReverse {
+                    direction = -1
+                } else {
+                    direction = 1
+                    imageIndex = 0
+                }
+            }
+            
+            imageIndex += direction
+        }.onChange(of: entity) { _ in
+            imageIndex = 0
+            direction = 1
+        }
+    }
+}
+
+struct ZYViewAuto: View {
     @StateObject var cpuInfo = CpuUsage()
     
     @Environment(\.managedObjectContext) private var viewContext
@@ -37,7 +86,6 @@ struct ZYView: View {
     @AppStorage("SpeedProportional") private var speedProportional = true
     @AppStorage("CurrentImageSetString") private var currentImageSet: String?
     @AppStorage("PlaySpeed") private var playSpeed = 0.5
-    @State var imageName = "ZhiyinDefault"
     
     @State var direction = 1
     @State var imageIndex = 0
@@ -68,48 +116,22 @@ struct ZYView: View {
     }
     
     var body: some View {
-        let timer = Timer.publish(every: TimeInterval((( speedProportional ? 1.0001 - Double(cpuInfo.cuse) : Double(cpuInfo.cuse)) / 5 * (1.1 - playSpeed))),
-                                  on: .main, in: .common).autoconnect()
-        
         VStack {
-            if entity != nil {
-                AutoInvertImage(data: Image(entity!.getImage(imageIndex)!, scale: 1, label: Text("ZhiyinView")),
-                                light: entity!.light_invert,
-                                dark: entity!.dark_invert)
-                .frame(width: width, height: height)
-            }
-            else {
-                AutoInvertImage(data: Image("ZhiyinDefault"),
-                                light: false,
-                                dark: false)
-                .frame(width: width, height: height)
-            }
-        }.onReceive(timer) { _ in
-            guard let frame_num = entity?.frame_num else {
-                return
-            }
-            if imageIndex == 0 {
-                direction = 1
-            }
-            if imageIndex >= frame_num - 1 {
-                if autoReverse {
-                    direction = -1
-                } else {
-                    direction = 1
-                    imageIndex = 0
-                }
-            }
-            
-            imageIndex += direction
-        }.onChange(of: currentImageSet!) { _ in
-            imageIndex = 0
-            direction = 1
+            ZYView(entity: entity,
+                   factor: cpuInfo.cuse,
+                   autoReverse: autoReverse,
+                   speedProportional: speedProportional,
+                   playSpeed: ((
+                    speedProportional
+                    ? 1.0001 - Double(cpuInfo.cuse)
+                    : Double(cpuInfo.cuse)) / 5 * (1.1 - playSpeed)))
+            .frame(width: width, height: height)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ZYView(width: 100, height: 100).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ZYViewAuto(width: 100, height: 100).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
