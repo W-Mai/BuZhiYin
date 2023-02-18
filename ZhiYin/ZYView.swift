@@ -8,12 +8,10 @@
 
 import SwiftUI
 
-
-
 struct AutoInvertImage: View {
     @Environment(\.colorScheme) var currentMode
     @AppStorage("ThemeMode") private var themeMode = 0
-    var data: CGImage?
+    var data: Image
     var light: Bool
     var dark: Bool
     
@@ -22,9 +20,9 @@ struct AutoInvertImage: View {
             let mode: ColorScheme = themeMode == 2 ? currentMode : themeMode == 0 ? .light : .dark
             
             if mode == .light && light == false || mode == .dark && dark == false {
-                Image(data!, scale: 1, label: Text("ZhiyinView")).resizable()
+                data.resizable()
             } else  {
-                Image(data!, scale: 1, label: Text("ZhiyinView")).resizable().colorInvert()
+                data.resizable().colorInvert()
             }
         }
     }
@@ -75,9 +73,15 @@ struct ZYView: View {
         
         VStack {
             if entity != nil {
-                AutoInvertImage(data: entity!.getImage(imageIndex),
+                AutoInvertImage(data: Image(entity!.getImage(imageIndex)!, scale: 1, label: Text("ZhiyinView")),
                                 light: entity!.light_invert,
                                 dark: entity!.dark_invert)
+                .frame(width: width, height: height)
+            }
+            else {
+                AutoInvertImage(data: Image("ZhiyinDefault"),
+                                light: false,
+                                dark: false)
                 .frame(width: width, height: height)
             }
         }.onReceive(timer) { _ in
@@ -106,6 +110,6 @@ struct ZYView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ZYView(width: 100, height: 100)
+        ZYView(width: 100, height: 100).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
