@@ -51,7 +51,7 @@ struct ZYView: View {
                     dark: entity!.dark_invert
                 )
             } else {
-                AutoInvertImage(data: Image("ZhiyinDefault"), light: false, dark: false)
+                AutoInvertImage(data: Image("ZhiyinDefault"), light: false, dark: true)
             }
         }.onReceive(timer) { _ in
             guard let frame_num = entity?.frame_num else {
