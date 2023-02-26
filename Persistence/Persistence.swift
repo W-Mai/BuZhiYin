@@ -62,6 +62,18 @@ struct PersistenceController {
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
+    
+    //  TODO: 加载其他的人的自定义包
+    init(url: URL) {
+        container = NSPersistentCloudKitContainer(name: "ZhiYins")
+        
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        container.viewContext.automaticallyMergesChangesFromParent = true
+    }
 }
 
 extension ZhiyinEntity {
