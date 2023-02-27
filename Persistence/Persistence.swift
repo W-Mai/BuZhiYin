@@ -10,12 +10,32 @@ import CoreData
 import AppKit
 
 struct PersistenceController {
-    static let shared = PersistenceController()
+    static let shared : PersistenceController = {
+        let result = PersistenceController()
+        let viewContext = result.container.viewContext
+        let fq = ZhiyinEntity.fetchRequest()
+        
+        guard let count = try? viewContext.count(for: fq) else {
+            return result
+        }
+        
+        if count == 0 {
+            _ = fillDefaultContent(context: viewContext)
+        }
+        
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        return result
+    }()
     
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        fillDefaultContent(context: viewContext)
+        _ = fillDefaultContent(context: viewContext)
         do {
             try viewContext.save()
         } catch {
@@ -55,6 +75,8 @@ struct PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        
     }
     
     //  TODO: 加载其他的人的自定义包

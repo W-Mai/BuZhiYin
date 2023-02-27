@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct ZhiYinApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    let persistenceController = PersistenceController.preview
+    let persistenceController = PersistenceController.shared
     
     var body: some Scene {
         Settings {
@@ -23,7 +23,7 @@ struct ZhiYinApp: App {
 import AppKit
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBarItem: NSStatusItem?
-    let persistenceController = PersistenceController.preview
+    let persistenceController = PersistenceController.shared
     
     @objc func exitApp() {
         NSApplication.shared.terminate(nil)
