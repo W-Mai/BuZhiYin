@@ -115,8 +115,9 @@ extension ZhiyinEntity {
     }
     
     func getImage(_ index: Int) -> CGImage? {
+        var index = index
         if index > self.frame_num || index < 0 {
-            return nil
+            index = 0
         }
         
         guard let img_src = getCGImageSource(self.img_data) else {
