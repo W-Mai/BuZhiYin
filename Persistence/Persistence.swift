@@ -15,17 +15,7 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        guard let urls = Bundle.main.urls(forResourcesWithExtension: "gif", subdirectory: nil) else {
-            return result
-        }
-        
-        for url in urls {
-            let newItem = ZhiyinEntity(context: viewContext)
-            _ = newItem.setGIF(data: (try? Data(contentsOf: url))!)
-            newItem.id = UUID()
-            newItem.name = "基尼钛镁\(UUID().uuidString)"
-            newItem.desc = UUID().uuidString
-        }
+        fillDefaultContent(context: viewContext)
         do {
             try viewContext.save()
         } catch {
@@ -77,6 +67,43 @@ struct PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+    
+    static func fillDefaultContent(context: NSManagedObjectContext) -> Int {
+        guard let urls = Bundle.main.urls(forResourcesWithExtension: "gif", subdirectory: nil) else {
+            return 0
+        }
+        let defaultConf = [
+            "mongmong": ("mongmong🐰", false, false),
+            "cat": ("猫砸键盘🐱", false, false),
+            "gojo_satoru": ("五条梧🥷", false, false),
+            "pink_cat": ("粉色猫猫🐱", false, false),
+            "zhiyin_basketball": ("只因篮球🏀", false, true),
+            "big_mouse_frog": ("大嘴🐸", false, false),
+            "xiaolan_turn": ("小蓝转圈圈♿️", false, false),
+            "karby": ("星之卡比", false, false),
+            "txbb": ("天线宝宝👶", false, false),
+            "zhiyin": ("只因铁山靠⛰️", false, true)
+        ]
+        
+        var count = 0
+        for url in urls {
+            let name = url.deletingPathExtension().lastPathComponent
+            guard let conf = defaultConf[name] else {
+                continue
+            }
+            
+            let newItem = ZhiyinEntity(context: context)
+            _ = newItem.setGIF(data: (try? Data(contentsOf: url))!)
+            newItem.id = UUID()
+            newItem.name = conf.0
+            newItem.desc = "不只因默认只因"
+            newItem.light_invert = conf.1
+            newItem.dark_invert = conf.2
+            count += 1
+        }
+        
+        return count
     }
 }
 
