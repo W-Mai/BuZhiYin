@@ -30,7 +30,7 @@ struct SettingsView: View {
                 .padding(5)
                 .background(RoundedRectangle(cornerRadius: 25).colorInvert())
                 .shadow(radius: 1)
-                .animation(.spring())
+                .animation(.spring(response: 0.3))
                 .padding()
                 
                 Form {
@@ -74,7 +74,7 @@ struct SettingsView: View {
                                 currentImageSet = item.id?.uuidString
                             }
                     }.padding(10)
-                        .animation(.spring())
+                        .animation(.spring(response: 0.2))
                 }.padding(4)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10, style: .continuous).stroke( Color.gray, lineWidth: 2).padding(4)
