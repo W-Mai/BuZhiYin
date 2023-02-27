@@ -20,75 +20,69 @@ struct SettingsView: View {
         animation: .default)
     private var items: FetchedResults<ZhiyinEntity>
     
-    @State var showPicker = false
-    
     var body: some View {
         TabView {
-            Form {
-                HStack {
-                    List {
-                        HStack {
-                            Spacer()
-                            HStack(alignment: .center) {
-                                ZYViewAuto(width: 100, height: 100).animation(.none)
-                            }
-                            .cornerRadius(20)
-                            .padding(5)
-                            .background(RoundedRectangle(cornerRadius: 25).colorInvert())
-                            .shadow(radius: 1)
-                            .onTapGesture {
-                                showPicker.toggle()
-                            }.animation(.spring())
-                            Spacer()
-                        }
-                        
-                        Picker(selection: $themeMode, label: Text("主题")) {
-                            Text("明亮").tag(0)
-                            Text("暗黑").tag(1)
-                            Text("跟随系统").tag(2)
-                        }
-                        Toggle("自动反转播放", isOn: $autoReverse).toggleStyle(.switch)
-                        Toggle("速度正比于CPU占用", isOn: $speedProportional).toggleStyle(.switch)
-                        HStack {
-                            Text("只因速")
-                            Slider(value: $playSpeed)
-                        }
-                        
-                    }
-                    if showPicker {
-                        ScrollView {
-                            Form {
-                                ForEach(items) {item in
-                                    HStack {
-                                        ZYView(entity: item, factor: 0.5).frame(width: 30, height: 30)
-                                            .cornerRadius(8).animation(.none)
-                                        
-                                        Text(item.name!)
-                                    }.padding(2)
-                                        .cornerRadius(10)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                                 .stroke(currentImageSet == item.id?.uuidString
-                                                         ? Color.accentColor
-                                                         : Color.clear, lineWidth: 2)
-                                                    
-                                        )
-                                        .frame(height: 30)
-                                        .frame(minWidth: 150, maxWidth: 150)
-                                        .scaleEffect(currentImageSet == item.id?.uuidString ? 0.9 : 1)
-                                        .onTapGesture {
-                                            currentImageSet = item.id?.uuidString
-                                        }
-                                }
-                            }.padding([.top, .bottom, .trailing], 8)
-                        }
-                        .transition(.opacity)
-                        .animation(.spring())
-                    }
+            VStack {
+                HStack(alignment: .center) {
+                    ZYViewAuto(width: 100, height: 100).animation(.none)
                 }
-            }
-            .frame(width: 300, height: 350)
-            .tabItem {Label("通用", systemImage: "gear")}
+                .cornerRadius(20)
+                .padding(5)
+                .background(RoundedRectangle(cornerRadius: 25).colorInvert())
+                .shadow(radius: 1)
+                .animation(.spring())
+                .padding()
+                
+                Form {
+                    Picker(selection: $themeMode, label: Text("主\t题")) {
+                        Text("明亮").tag(0)
+                        Text("暗黑").tag(1)
+                        Text("跟随系统").tag(2)
+                    }
+                    Toggle("自动反转播\n放", isOn: $autoReverse).toggleStyle(.switch)
+                    Toggle("速度正比于\nCPU占用", isOn: $speedProportional).toggleStyle(.switch)
+                    HStack {
+                        Text("只因速")
+                        Slider(value: $playSpeed)
+                    }
+                }.padding([.horizontal])
+                
+                ScrollView {
+                    ForEach(items) { item in
+                        let sizeScale = currentImageSet == item.id?.uuidString ? 1.5 : 1
+                        HStack {
+                            ZYView(entity: item, factor: 0.5).frame(
+                                width: 30 * sizeScale,
+                                height: 30 * sizeScale
+                            )
+                            .cornerRadius(8).animation(.none)
+                            Text(item.name!)
+                            Spacer()
+                        }.padding(4)
+                            .background(Color.secondary.colorInvert())
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            )
+                            .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .stroke(currentImageSet == item.id?.uuidString
+                                        ? Color.accentColor
+                                        : Color.clear, lineWidth: 2)
+                            )
+                            .frame(height: 32 * sizeScale)
+                            .scaleEffect(currentImageSet == item.id?.uuidString ? 1 : 0.95)
+                            .onTapGesture {
+                                currentImageSet = item.id?.uuidString
+                            }
+                    }.padding(10)
+                        .animation(.spring())
+                }.padding(4)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous).stroke( Color.gray, lineWidth: 2).padding(4)
+                    )
+                
+            }.frame(width: 300, height: 500)
+                .tabItem {Label("鸡础设置", systemImage: "gear")}
+            
             
             Form {
                 VStack {
@@ -101,8 +95,10 @@ struct SettingsView: View {
             }.frame(width: 300, height: 300)
                 .tabItem {Label("关于", systemImage: "info.circle.fill")}
         }
+        
     }
 }
+
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
