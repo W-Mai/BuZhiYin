@@ -56,5 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusBarItem?.button?.title = " "
         statusBarItem?.button?.addSubview(mainView)
         statusBarItem?.button?.action = #selector(exitApp)
+        
+        openSettings()
     }
 }
