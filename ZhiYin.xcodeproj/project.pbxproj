@@ -11,6 +11,15 @@
 		458BE93B299F4CB300CC2D4B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE93A299F4CB300CC2D4B /* Persistence.swift */; };
 		458BE93D299F67DF00CC2D4B /* txbb.gif in Resources */ = {isa = PBXBuildFile; fileRef = 458BE93C299F67DF00CC2D4B /* txbb.gif */; };
 		458BE94129A1101200CC2D4B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE94029A1101200CC2D4B /* Utils.swift */; };
+		45A3125A29AD35490069F735 /* pink_cat.gif in Resources */ = {isa = PBXBuildFile; fileRef = 45A3125329AD35490069F735 /* pink_cat.gif */; };
+		45A3125B29AD35490069F735 /* xiaolan_turn.gif in Resources */ = {isa = PBXBuildFile; fileRef = 45A3125429AD35490069F735 /* xiaolan_turn.gif */; };
+		45A3125C29AD35490069F735 /* big_mouse_frog.gif in Resources */ = {isa = PBXBuildFile; fileRef = 45A3125529AD35490069F735 /* big_mouse_frog.gif */; };
+		45A3125D29AD35490069F735 /* gojo_satoru.gif in Resources */ = {isa = PBXBuildFile; fileRef = 45A3125629AD35490069F735 /* gojo_satoru.gif */; };
+		45A3125E29AD35490069F735 /* cat.gif in Resources */ = {isa = PBXBuildFile; fileRef = 45A3125729AD35490069F735 /* cat.gif */; };
+		45A3125F29AD35490069F735 /* mongmong.gif in Resources */ = {isa = PBXBuildFile; fileRef = 45A3125829AD35490069F735 /* mongmong.gif */; };
+		45A3126029AD35490069F735 /* karby.gif in Resources */ = {isa = PBXBuildFile; fileRef = 45A3125929AD35490069F735 /* karby.gif */; };
+		45A3126429AD3A800069F735 /* zhiyin.gif in Resources */ = {isa = PBXBuildFile; fileRef = 45A3126329AD3A800069F735 /* zhiyin.gif */; };
+		45A3126629AD42080069F735 /* zhiyin_basketball.gif in Resources */ = {isa = PBXBuildFile; fileRef = 45A3126529AD42080069F735 /* zhiyin_basketball.gif */; };
 		45E8EA262974541E000D163E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EA252974541E000D163E /* SettingsView.swift */; };
 		D828C8DA296C25930017BF51 /* ZhiYinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D828C8D9296C25930017BF51 /* ZhiYinApp.swift */; };
 		D828C8DE296C25940017BF51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D828C8DD296C25940017BF51 /* Assets.xcassets */; };
@@ -22,8 +31,17 @@
 /* Begin PBXFileReference section */
 		4530F017299E9D910056556E /* ZhiYins.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ZhiYins.xcdatamodel; sourceTree = "<group>"; };
 		458BE93A299F4CB300CC2D4B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		458BE93C299F67DF00CC2D4B /* txbb.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = txbb.gif; path = "refs/img-srcs/origin/txbb.gif"; sourceTree = SOURCE_ROOT; };
+		458BE93C299F67DF00CC2D4B /* txbb.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = txbb.gif; path = ZhiYin/DefaultGIF/txbb.gif; sourceTree = SOURCE_ROOT; };
 		458BE94029A1101200CC2D4B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		45A3125329AD35490069F735 /* pink_cat.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = pink_cat.gif; sourceTree = "<group>"; };
+		45A3125429AD35490069F735 /* xiaolan_turn.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xiaolan_turn.gif; sourceTree = "<group>"; };
+		45A3125529AD35490069F735 /* big_mouse_frog.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = big_mouse_frog.gif; sourceTree = "<group>"; };
+		45A3125629AD35490069F735 /* gojo_satoru.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gojo_satoru.gif; sourceTree = "<group>"; };
+		45A3125729AD35490069F735 /* cat.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cat.gif; sourceTree = "<group>"; };
+		45A3125829AD35490069F735 /* mongmong.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mongmong.gif; sourceTree = "<group>"; };
+		45A3125929AD35490069F735 /* karby.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = karby.gif; sourceTree = "<group>"; };
+		45A3126329AD3A800069F735 /* zhiyin.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zhiyin.gif; sourceTree = "<group>"; };
+		45A3126529AD42080069F735 /* zhiyin_basketball.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zhiyin_basketball.gif; sourceTree = "<group>"; };
 		45E8EA252974541E000D163E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D828C8D6296C25930017BF51 /* ZhiYin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiYin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D828C8D9296C25930017BF51 /* ZhiYinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhiYinApp.swift; sourceTree = "<group>"; };
@@ -62,6 +80,23 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		45A3126129AD366C0069F735 /* DefaultGIF */ = {
+			isa = PBXGroup;
+			children = (
+				45A3126529AD42080069F735 /* zhiyin_basketball.gif */,
+				45A3126329AD3A800069F735 /* zhiyin.gif */,
+				45A3125529AD35490069F735 /* big_mouse_frog.gif */,
+				45A3125729AD35490069F735 /* cat.gif */,
+				45A3125629AD35490069F735 /* gojo_satoru.gif */,
+				45A3125929AD35490069F735 /* karby.gif */,
+				45A3125329AD35490069F735 /* pink_cat.gif */,
+				45A3125829AD35490069F735 /* mongmong.gif */,
+				45A3125429AD35490069F735 /* xiaolan_turn.gif */,
+				458BE93C299F67DF00CC2D4B /* txbb.gif */,
+			);
+			path = DefaultGIF;
+			sourceTree = "<group>";
+		};
 		D828C8CD296C25920017BF51 = {
 			isa = PBXGroup;
 			children = (
@@ -83,7 +118,7 @@
 		D828C8D8296C25930017BF51 /* ZhiYin */ = {
 			isa = PBXGroup;
 			children = (
-				458BE93C299F67DF00CC2D4B /* txbb.gif */,
+				45A3126129AD366C0069F735 /* DefaultGIF */,
 				45E8EA252974541E000D163E /* SettingsView.swift */,
 				D83C2A19296C863500697CA3 /* CpuUsage.swift */,
 				D828C8D9296C25930017BF51 /* ZhiYinApp.swift */,
@@ -162,8 +197,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D828C8E1296C25940017BF51 /* Preview Assets.xcassets in Resources */,
+				45A3125A29AD35490069F735 /* pink_cat.gif in Resources */,
+				45A3126029AD35490069F735 /* karby.gif in Resources */,
+				45A3125B29AD35490069F735 /* xiaolan_turn.gif in Resources */,
+				45A3125E29AD35490069F735 /* cat.gif in Resources */,
+				45A3126429AD3A800069F735 /* zhiyin.gif in Resources */,
+				45A3125F29AD35490069F735 /* mongmong.gif in Resources */,
 				458BE93D299F67DF00CC2D4B /* txbb.gif in Resources */,
+				45A3126629AD42080069F735 /* zhiyin_basketball.gif in Resources */,
+				45A3125D29AD35490069F735 /* gojo_satoru.gif in Resources */,
 				D828C8DE296C25940017BF51 /* Assets.xcassets in Resources */,
+				45A3125C29AD35490069F735 /* big_mouse_frog.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

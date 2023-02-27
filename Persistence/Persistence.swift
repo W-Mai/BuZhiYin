@@ -15,9 +15,13 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
+        guard let urls = Bundle.main.urls(forResourcesWithExtension: "gif", subdirectory: nil) else {
+            return result
+        }
+        
+        for url in urls {
             let newItem = ZhiyinEntity(context: viewContext)
-            _ = newItem.setGIF(data: (try? Data(contentsOf: Bundle.main.url(forResource: "txbb", withExtension: "gif")!))!)
+            _ = newItem.setGIF(data: (try? Data(contentsOf: url))!)
             newItem.id = UUID()
             newItem.name = "基尼钛镁\(UUID().uuidString)"
             newItem.desc = UUID().uuidString
