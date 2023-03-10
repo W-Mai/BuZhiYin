@@ -20,6 +20,8 @@ struct ZhiYinApp: App {
     }
 }
 
+let iconMinWidth = CGFloat(22);
+
 import AppKit
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBarItem: NSStatusItem?
@@ -48,10 +50,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem(title: "设置", action: #selector(openSettings), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "退出", action: #selector(exitApp), keyEquivalent: ""))
         
-        let contentView = ZYViewAuto(width: 22, height: 22).environment(\.managedObjectContext, persistenceController.container.viewContext)
+        let contentView = ZYViewAuto(width: iconMinWidth, height: iconMinWidth).environment(\.managedObjectContext, persistenceController.container.viewContext)
         let mainView = NSHostingView(rootView: contentView)
-        mainView.frame = NSRect(x: 0, y: 0, width: 22, height: 22)
-        statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        mainView.frame = NSRect(x: 0, y: 0, width: iconMinWidth, height: iconMinWidth)
+        
+        statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength < iconMinWidth ? iconMinWidth : NSStatusItem.variableLength)
         statusBarItem?.menu = menu
         statusBarItem?.button?.title = " "
         statusBarItem?.button?.addSubview(mainView)
