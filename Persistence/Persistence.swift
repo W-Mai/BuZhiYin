@@ -17,8 +17,12 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
             let newItem = ZhiyinEntity(context: viewContext)
-            let img = NSImage(#imageLiteral(resourceName: "sssss171.png"))
+            let img = NSImage(#imageLiteral(resourceName: "zhiyin9"))
             newItem.img_data = img.tiffRepresentation
+            newItem.id = UUID()
+            newItem.name = UUID().uuidString
+            newItem.desc = UUID().uuidString
+            newItem.frame_num = 1
         }
         do {
             try viewContext.save()
@@ -34,7 +38,7 @@ struct PersistenceController {
     let container: NSPersistentCloudKitContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "ZhiyinDB")
+        container = NSPersistentCloudKitContainer(name: "ZhiYins")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         } else {

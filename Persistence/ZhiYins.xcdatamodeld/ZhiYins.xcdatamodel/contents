@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22C65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="Zhiyins">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22C65" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="Zhiyins">
     <entity name="ZhiyinEntity" representedClassName="ZhiyinEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="dark_invert" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="dark_invert" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="frame_num" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="img_data" optional="YES" attributeType="Binary"/>
-        <attribute name="light_invert" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="light_invert" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
 </model>
