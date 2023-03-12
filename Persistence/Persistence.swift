@@ -47,16 +47,31 @@ struct PersistenceController {
         return result
     }()
     
-    let container: NSPersistentCloudKitContainer
+    let container: NSPersistentContainer
     
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "ZhiYins")
+//        let persistentStoreDescription = NSPersistentStoreDescription(url: storeURL)
+//        persistentStoreDescription.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+//        persistentStoreDescription.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
+//        persistentStoreDescription.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
+//
+//        let container = NSPersistentContainer(name: "MyModel")
+//        container.persistentStoreDescriptions = [persistentStoreDescription]
+//        container.loadPersistentStores { (storeDescription, error) in
+//            if let error = error {
+//                // 处理错误
+//            }
+//        }
+
+        container = NSPersistentContainer(name: "ZhiYins")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         } else {
             let description = container.persistentStoreDescriptions.first
-            
-            description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.tech.xclz.Zhiyin")
+            description?.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+            description?.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
+            description?.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
+//            description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.tech.xclz.Zhiyin")
         }
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -74,7 +89,7 @@ struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-        container.viewContext.automaticallyMergesChangesFromParent = true
+//        container.viewContext.automaticallyMergesChangesFromParent = true
         
         
     }

@@ -90,7 +90,7 @@ struct ZYViewAuto: View {
     
     @AppStorage("AutoReverse") private var autoReverse = true
     @AppStorage("SpeedProportional") private var speedProportional = true
-    @AppStorage("CurrentImageSetString") private var currentImageSet: String?
+    @AppStorage("CurrentImageSetString") private var currentImageSet: String = UUID().uuidString
     @AppStorage("PlaySpeed") private var playSpeed = 0.5
     
     @State var direction = 1
@@ -102,7 +102,7 @@ struct ZYViewAuto: View {
     var entity: ZhiyinEntity? {
         get {
             let fetch_req: NSFetchRequest<ZhiyinEntity> = ZhiyinEntity.fetchRequest()
-            fetch_req.predicate = NSPredicate(format: "id=%@", currentImageSet!)
+            fetch_req.predicate = NSPredicate(format: "id=%@", currentImageSet)
             
             guard let res = try? viewContext.fetch(fetch_req) else {
                 return nil
