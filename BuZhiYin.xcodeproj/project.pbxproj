@@ -43,7 +43,7 @@
 		45A3126329AD3A800069F735 /* zhiyin.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zhiyin.gif; sourceTree = "<group>"; };
 		45A3126529AD42080069F735 /* zhiyin_basketball.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zhiyin_basketball.gif; sourceTree = "<group>"; };
 		45E8EA252974541E000D163E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		D828C8D6296C25930017BF51 /* ZhiYin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiYin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D828C8D6296C25930017BF51 /* BuZhiYin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuZhiYin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D828C8D9296C25930017BF51 /* ZhiYinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhiYinApp.swift; sourceTree = "<group>"; };
 		D828C8DD296C25940017BF51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D828C8E0296C25940017BF51 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 		D828C8D7296C25930017BF51 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D828C8D6296C25930017BF51 /* ZhiYin.app */,
+				D828C8D6296C25930017BF51 /* BuZhiYin.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,9 +141,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D828C8D5296C25930017BF51 /* ZhiYin */ = {
+		D828C8D5296C25930017BF51 /* BuZhiYin */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D828C8E5296C25940017BF51 /* Build configuration list for PBXNativeTarget "ZhiYin" */;
+			buildConfigurationList = D828C8E5296C25940017BF51 /* Build configuration list for PBXNativeTarget "BuZhiYin" */;
 			buildPhases = (
 				D828C8D2296C25930017BF51 /* Sources */,
 				D828C8D3296C25930017BF51 /* Frameworks */,
@@ -153,9 +153,9 @@
 			);
 			dependencies = (
 			);
-			name = ZhiYin;
+			name = BuZhiYin;
 			productName = ZhiYin;
-			productReference = D828C8D6296C25930017BF51 /* ZhiYin.app */;
+			productReference = D828C8D6296C25930017BF51 /* BuZhiYin.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -173,7 +173,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D828C8D1296C25920017BF51 /* Build configuration list for PBXProject "ZhiYin" */;
+			buildConfigurationList = D828C8D1296C25920017BF51 /* Build configuration list for PBXProject "BuZhiYin" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -186,7 +186,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D828C8D5296C25930017BF51 /* ZhiYin */,
+				D828C8D5296C25930017BF51 /* BuZhiYin */,
 			);
 		};
 /* End PBXProject section */
@@ -370,9 +370,9 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = studio.xclz.BuZhiYin;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.3.1;
+				PRODUCT_BUNDLE_IDENTIFIER = studio.xclz.BuZhiYin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -404,9 +404,9 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = studio.xclz.BuZhiYin;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.3.1;
+				PRODUCT_BUNDLE_IDENTIFIER = studio.xclz.BuZhiYin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -417,7 +417,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D828C8D1296C25920017BF51 /* Build configuration list for PBXProject "ZhiYin" */ = {
+		D828C8D1296C25920017BF51 /* Build configuration list for PBXProject "BuZhiYin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D828C8E3296C25940017BF51 /* Debug */,
@@ -426,7 +426,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D828C8E5296C25940017BF51 /* Build configuration list for PBXNativeTarget "ZhiYin" */ = {
+		D828C8E5296C25940017BF51 /* Build configuration list for PBXNativeTarget "BuZhiYin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D828C8E6296C25940017BF51 /* Debug */,

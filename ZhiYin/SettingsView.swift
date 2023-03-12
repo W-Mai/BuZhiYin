@@ -90,7 +90,7 @@ struct SettingsView: View {
                     Text("🐔🫵🏻\n🌞🈚️")
                         .font(.system(size: 80)).multilineTextAlignment(.center)
                 }.onTapGesture {
-                    NSWorkspace.shared.open(URL(string:"https://github.com/W-Mai/ZhiYin")!)
+                    NSWorkspace.shared.open(URL(string:"https://github.com/W-Mai/BuZhiYin")!)
                 }.frame(maxWidth: .infinity, minHeight: 200)
                 Spacer(minLength: 25)
                 FriendLinksView()
