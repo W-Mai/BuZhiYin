@@ -8,6 +8,14 @@
 
 import SwiftUI
 
+/*
+ 0.1       1
+ 0.2       0.012
+ 0.012     8
+ */
+
+let minInterval: Float = 0.012 // 80FPS
+
 struct AutoInvertImage: View {
     @Environment(\.colorScheme) var currentMode
     @AppStorage("ThemeMode") private var themeMode = 0
@@ -32,8 +40,6 @@ struct ZYView: View {
     var entity: ZhiyinEntity?
     var factor: Float
     var autoReverse = true
-    var speedProportional = true
-    var playSpeed = 0.5
     
     @State var direction = 1
     @State var imageIndex = 0
@@ -116,15 +122,17 @@ struct ZYViewAuto: View {
     }
     
     var body: some View {
+        
+        let factor = Float(( speedProportional
+                        ? 1.0001 - Double(cpuInfo.cuse)
+                        : Double(cpuInfo.cuse)) / 5 * (1.1 - playSpeed))
+        
         VStack {
-            ZYView(entity: entity,
-                   factor: cpuInfo.cuse,
-                   autoReverse: autoReverse,
-                   speedProportional: speedProportional,
-                   playSpeed: ((
-                    speedProportional
-                    ? 1.0001 - Double(cpuInfo.cuse)
-                    : Double(cpuInfo.cuse)) / 5 * (1.1 - playSpeed)))
+            ZYView(
+                entity: entity,
+                factor: clamp(factor, lowerBound: minInterval, upperBound: .infinity),
+                autoReverse: autoReverse
+            )
             .frame(width: width, height: height)
         }
     }

@@ -85,20 +85,54 @@ struct SettingsView: View {
             
             
             Form {
+                Spacer()
                 VStack {
-                    Text("🐔🫵🏻🌞🈚️")
-                        .font(.system(size: 100)).multilineTextAlignment(.center)
+                    Text("🐔🫵🏻\n🌞🈚️")
+                        .font(.system(size: 80)).multilineTextAlignment(.center)
                 }.onTapGesture {
                     NSWorkspace.shared.open(URL(string:"https://github.com/W-Mai/ZhiYin")!)
-                }
-                
-            }.frame(width: 300, height: 300)
+                }.frame(maxWidth: .infinity, minHeight: 200)
+                Spacer(minLength: 25)
+                FriendLinksView()
+            }.padding([.vertical]).frame(width: 300, height: 360)
                 .tabItem {Label("关于", systemImage: "info.circle.fill")}
         }
         
     }
 }
 
+struct FriendLinksView: View {
+    var body: some View {
+        VStack {
+            let frientlinks = friendLinks()
+            if frientlinks.count > 0 {
+                Text("- 更多推荐 -").frame(maxWidth: .infinity).foregroundColor(.gray)
+                ScrollView {
+                    ForEach(frientlinks) { frientlink in
+                        HStack {
+                            Image(frientlink.icon).resizable().frame(width: 50, height: 50).cornerRadius(12, antialiased: true).shadow(color: .gray.opacity(0.1), radius: 2)
+//                            Spacer()
+                            VStack(alignment: .leading) {
+                                Text(frientlink.title)
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                                Text(frientlink.desc).font(.subheadline).foregroundColor(.gray)
+                            }
+                            Spacer()
+                            Text("查看").padding().foregroundColor(Color.accentColor)
+                        }.frame(maxWidth: .infinity)
+                            .padding(8)
+                            .background(Color.primary.colorInvert())
+                            .cornerRadius(12)
+                            .onTapGesture {
+                                NSWorkspace.shared.open(frientlink.link)
+                            }
+                    }
+                }
+            }
+        }.padding([.horizontal])
+    }
+}
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
