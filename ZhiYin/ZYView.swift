@@ -52,7 +52,7 @@ struct ZYView: View {
         VStack {
             if entity != nil {
                 AutoInvertImage(
-                    data: Image(entity!.getImage(imageIndex)!, scale: 1, label: Text("ZhiyinView")),
+                    data: Image(entity!.getImage(imageIndex), scale: 1, label: Text("ZhiyinView")),
                     light: entity!.light_invert,
                     dark: entity!.dark_invert
                 )

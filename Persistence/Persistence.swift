@@ -50,19 +50,19 @@ struct PersistenceController {
     let container: NSPersistentContainer
     
     init(inMemory: Bool = false) {
-//        let persistentStoreDescription = NSPersistentStoreDescription(url: storeURL)
-//        persistentStoreDescription.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
-//        persistentStoreDescription.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
-//        persistentStoreDescription.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
-//
-//        let container = NSPersistentContainer(name: "MyModel")
-//        container.persistentStoreDescriptions = [persistentStoreDescription]
-//        container.loadPersistentStores { (storeDescription, error) in
-//            if let error = error {
-//                // 处理错误
-//            }
-//        }
-
+        //        let persistentStoreDescription = NSPersistentStoreDescription(url: storeURL)
+        //        persistentStoreDescription.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        //        persistentStoreDescription.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
+        //        persistentStoreDescription.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
+        //
+        //        let container = NSPersistentContainer(name: "MyModel")
+        //        container.persistentStoreDescriptions = [persistentStoreDescription]
+        //        container.loadPersistentStores { (storeDescription, error) in
+        //            if let error = error {
+        //                // 处理错误
+        //            }
+        //        }
+        
         container = NSPersistentContainer(name: "ZhiYins")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
@@ -71,7 +71,7 @@ struct PersistenceController {
             description?.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
             description?.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
             description?.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
-//            description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.tech.xclz.Zhiyin")
+            //            description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.tech.xclz.Zhiyin")
         }
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -89,7 +89,7 @@ struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-//        container.viewContext.automaticallyMergesChangesFromParent = true
+        //        container.viewContext.automaticallyMergesChangesFromParent = true
         
         
     }
@@ -145,6 +145,8 @@ struct PersistenceController {
 }
 
 extension ZhiyinEntity {
+    static var defaultImage = #imageLiteral(resourceName: "sssss171.png").cgImage(forProposedRect: nil, context: nil, hints: nil)!;
+    
     private func getImageOptions() -> NSDictionary {
         return [kCGImageSourceShouldCache as String: NSNumber(value: true),
                 kCGImageSourceTypeIdentifierHint as String: kUTTypeGIF]
@@ -178,16 +180,16 @@ extension ZhiyinEntity {
         return true
     }
     
-    func getImage(_ index: Int) -> CGImage? {
+    func getImage(_ index: Int) -> CGImage {
         var index = index
-        if index > self.frame_num || index < 0 {
+        if index >= self.frame_num || index < 0 {
             index = 0
         }
         
         guard let img_src = getCGImageSource(self.img_data) else {
-            return nil
+            return ZhiyinEntity.defaultImage
         }
         
-        return CGImageSourceCreateImageAtIndex(img_src, index, getImageOptions())
+        return CGImageSourceCreateImageAtIndex(img_src, index, getImageOptions())!
     }
 }
