@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4500DC2929C2F22B00E745D1 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 4500DC2829C2F22B00E745D1 /* LaunchAtLogin */; };
 		4530F018299E9D910056556E /* ZhiYins.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4530F016299E9D910056556E /* ZhiYins.xcdatamodeld */; };
 		458BE93B299F4CB300CC2D4B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE93A299F4CB300CC2D4B /* Persistence.swift */; };
 		458BE93D299F67DF00CC2D4B /* txbb.gif in Resources */ = {isa = PBXBuildFile; fileRef = 458BE93C299F67DF00CC2D4B /* txbb.gif */; };
@@ -59,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4500DC2929C2F22B00E745D1 /* LaunchAtLogin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +160,9 @@
 			dependencies = (
 			);
 			name = BuZhiYin;
+			packageProductDependencies = (
+				4500DC2829C2F22B00E745D1 /* LaunchAtLogin */,
+			);
 			productName = ZhiYin;
 			productReference = D828C8D6296C25930017BF51 /* BuZhiYin.app */;
 			productType = "com.apple.product-type.application";
@@ -186,6 +191,9 @@
 				Base,
 			);
 			mainGroup = D828C8CD296C25920017BF51;
+			packageReferences = (
+				4500DC2729C2F22B00E745D1 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+			);
 			productRefGroup = D828C8D7296C25930017BF51 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -442,6 +450,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4500DC2729C2F22B00E745D1 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4500DC2829C2F22B00E745D1 /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4500DC2729C2F22B00E745D1 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			productName = LaunchAtLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		4530F016299E9D910056556E /* ZhiYins.xcdatamodeld */ = {

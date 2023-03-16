@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LaunchAtLogin
 
 struct SettingsView: View {
     @AppStorage("AutoReverse") private var autoReverse = true
@@ -85,6 +86,14 @@ struct SettingsView: View {
             
             
             Form {
+                Form {
+                    LaunchAtLogin.Toggle("开🐔自动太美").toggleStyle(.switch)
+                }.padding([.horizontal])
+            }.padding([.vertical])
+                .frame(width: 300)
+                .tabItem {Label("高只因设置", systemImage: "gear.circle")}
+            
+            Form {
                 Spacer()
                 VStack {
                     Text("🐔🫵🏻\n🌞🈚️")
@@ -97,7 +106,6 @@ struct SettingsView: View {
             }.padding([.vertical]).frame(width: 300, height: 360)
                 .tabItem {Label("关于", systemImage: "info.circle.fill")}
         }
-        
     }
 }
 
@@ -111,7 +119,6 @@ struct FriendLinksView: View {
                     ForEach(frientlinks) { frientlink in
                         HStack {
                             Image(frientlink.icon).resizable().frame(width: 50, height: 50).cornerRadius(12, antialiased: true).shadow(color: .gray.opacity(0.1), radius: 2)
-//                            Spacer()
                             VStack(alignment: .leading) {
                                 Text(frientlink.title)
                                     .font(.title3)
