@@ -39,8 +39,8 @@ struct SettingsView: View {
                         Text("暗黑").tag(1)
                         Text("跟随系统").tag(2)
                     }
-                    Toggle("自动反转播\n放", isOn: $autoReverse).toggleStyle(.switch)
-                    Toggle("速度正比于\nCPU占用", isOn: $speedProportional).toggleStyle(.switch)
+                    Toggle("自动反转播放", isOn: $autoReverse).toggleStyle(.switch)
+                    Toggle("速度正比CPU", isOn: $speedProportional).toggleStyle(.switch)
                     HStack {
                         Text("只因速")
                         Slider(value: $playSpeed)
