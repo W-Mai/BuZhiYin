@@ -151,7 +151,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D828C8E5296C25940017BF51 /* Build configuration list for PBXNativeTarget "BuZhiYin" */;
 			buildPhases = (
-				4500DC2A29C2F77500E745D1 /* ShellScript */,
 				D828C8D2296C25930017BF51 /* Sources */,
 				D828C8D3296C25930017BF51 /* Frameworks */,
 				D828C8D4296C25930017BF51 /* Resources */,
@@ -225,26 +224,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		4500DC2A29C2F77500E745D1 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "agvtool next-version -all\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D828C8D2296C25930017BF51 /* Sources */ = {
