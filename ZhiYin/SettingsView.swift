@@ -21,6 +21,8 @@ struct SettingsView: View {
         animation: .default)
     private var items: FetchedResults<ZhiyinEntity>
     
+    @State private var pop = false
+    
     var body: some View {
         TabView {
             VStack {
@@ -42,15 +44,17 @@ struct SettingsView: View {
                     }
                     Toggle("自动反转播放", isOn: $autoReverse).toggleStyle(.switch)
                     Toggle("速度正比CPU", isOn: $speedProportional).toggleStyle(.switch)
-                    HStack {
+                    
+                    Slider(value: $playSpeed) {
                         Text("只因速")
-                        Slider(value: $playSpeed)
                     }
+                    
                 }.padding([.horizontal])
                 
                 ScrollView(showsIndicators: false) {
                     ForEach(items) { item in
                         let sizeScale = currentImageSet == item.id?.uuidString ? 1.5 : 1
+                        
                         HStack {
                             ZYView(entity: item, factor: 0.5).frame(
                                 width: 30 * sizeScale,
@@ -59,6 +63,26 @@ struct SettingsView: View {
                             .cornerRadius(8).animation(.none)
                             Text(item.name!)
                             Spacer()
+                            
+                            if currentImageSet == item.id?.uuidString {
+                                Button {
+                                    pop = true
+                                } label: {
+                                    Image(systemName: "square.and.pencil")
+                                        .resizable()
+                                        .foregroundColor(Color.accentColor)
+                                }.padding(10)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .aspectRatio(1, contentMode: ContentMode.fit)
+                                    .buttonStyle(.plain)
+                                    .popover(isPresented: $pop, arrowEdge: Edge.trailing) {
+                                        Form {
+                                            ZYView(entity: item, factor: 0.1)
+                                                .cornerRadius(8)
+                                        }
+                                        
+                                    }
+                            }
                         }.padding(4)
                             .background(Color.secondary.colorInvert())
                             .clipShape(
