@@ -48,7 +48,7 @@ struct SettingsView: View {
                     }
                 }.padding([.horizontal])
                 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     ForEach(items) { item in
                         let sizeScale = currentImageSet == item.id?.uuidString ? 1.5 : 1
                         HStack {
@@ -78,7 +78,7 @@ struct SettingsView: View {
                         .animation(.spring(response: 0.2))
                 }.padding(4)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous).stroke( Color.gray, lineWidth: 2).padding(4)
+                        RoundedRectangle(cornerRadius: 10, style: .continuous).stroke( Color.gray.opacity(0.2), lineWidth: 2).padding(4)
                     )
                 
             }.frame(width: 300, height: 500)
