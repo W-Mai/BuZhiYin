@@ -65,23 +65,12 @@ struct SettingsView: View {
                             Spacer()
                             
                             if currentImageSet == item.id?.uuidString {
-                                Button {
-                                    pop = true
-                                } label: {
-                                    Image(systemName: "square.and.pencil")
-                                        .resizable()
-                                        .foregroundColor(Color.accentColor)
-                                }.padding(10)
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    .aspectRatio(1, contentMode: ContentMode.fit)
-                                    .buttonStyle(.plain)
-                                    .popover(isPresented: $pop, arrowEdge: Edge.trailing) {
-                                        Form {
-                                            ZYView(entity: item, factor: 0.1)
-                                                .cornerRadius(8)
-                                        }
-                                        
+                                EditButtonWithPopover(isPresented: $pop) {
+                                    Form {
+                                        ZYView(entity: item, factor: 0.1)
+                                            .cornerRadius(8)
                                     }
+                                }
                             }
                         }.padding(4)
                             .background(Color.secondary.colorInvert())
@@ -168,5 +157,26 @@ struct FriendLinksView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    }
+}
+
+struct EditButtonWithPopover<Content: View>: View {
+    @Binding var isPresented: Bool
+    var content: () -> Content
+    
+    var body: some View {
+        Button {
+            isPresented = true
+        } label: {
+            Image(systemName: "square.and.pencil")
+                .resizable()
+                .foregroundColor(Color.accentColor)
+        }.padding(10)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .aspectRatio(1, contentMode: ContentMode.fit)
+            .buttonStyle(.plain)
+            .popover(isPresented: $isPresented, arrowEdge: Edge.trailing) {
+                content()
+            }
     }
 }
