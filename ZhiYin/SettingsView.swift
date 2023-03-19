@@ -66,10 +66,7 @@ struct SettingsView: View {
                             
                             if currentImageSet == item.id?.uuidString {
                                 EditButtonWithPopover(isPresented: $pop) {
-                                    Form {
-                                        ZYView(entity: item, factor: 0.1)
-                                            .cornerRadius(8)
-                                    }
+                                    EditZYView(item: item)
                                 }
                             }
                         }.padding(4)
@@ -178,5 +175,73 @@ struct EditButtonWithPopover<Content: View>: View {
             .popover(isPresented: $isPresented, arrowEdge: Edge.trailing) {
                 content()
             }
+    }
+}
+
+struct EditZYView: View {
+    @State private var username: String
+    
+    @State var item: ZhiyinEntity
+    
+    @State var name: String
+    @State var desc: String
+    @State var light: Bool
+    @State var dark: Bool
+    
+    init(item: ZhiyinEntity) {
+        self.item = item
+        self.name = item.name!
+        self.desc = item.desc!
+        self.light = item.light_invert
+        self.dark = item.dark_invert
+        
+        username = item.name!
+    }
+    
+    var body: some View {
+        Form {
+            HStack {
+                ZYView(entity: item, factor: 0.1)
+                    .frame(width: 128, height: 128)
+                    .cornerRadius(24)
+                    
+                VStack {
+                    Form {
+                        Label(item.id!.uuidString, systemImage: "number.square")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        
+                        TextField("名字", text: $name)
+                        TextField("描述", text: $desc)
+                        Toggle("亮色反转", isOn: $light).toggleStyle(.switch)
+                        Toggle("暗色反转", isOn: $dark).toggleStyle(.switch)
+                        
+                       
+                    }.padding()
+                    HStack {
+                        Spacer()
+                        Button {
+                            
+                        } label: {
+                            Label("删掉我呗😭", systemImage: "trash").foregroundColor(.red)
+                        }
+                    }
+                }
+            }
+            
+
+        }
+        .padding()
+        .onDisappear {
+            item.name = name
+            item.desc = desc
+            item.light_invert = light
+            item.dark_invert = dark
+            
+            item.save()
+            debugPrint("\(self.name) \(self.desc) \(self.light) \(self.dark)")
+        }
+
     }
 }
