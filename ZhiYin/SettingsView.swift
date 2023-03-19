@@ -201,10 +201,22 @@ struct EditZYView: View {
     var body: some View {
         Form {
             HStack {
-                ZYView(entity: item, factor: 0.1)
-                    .frame(width: 128, height: 128)
-                    .cornerRadius(24)
-                    
+                Button {
+                    debugPrint("click ")
+                } label: {
+                    ZYView(entity: item, factor: 0.1)
+                }
+                .buttonStyle(.plain)
+                .cornerRadius(24)
+                .padding()
+                .background(
+                    ZStack {
+                        Image(systemName: "plus")
+                        RoundedRectangle(cornerRadius: 24, style: .continuous).stroke(lineWidth: 4)
+                    }.foregroundColor(.accentColor)
+                )
+                .frame(width: 128, height: 128)
+                
                 VStack {
                     Form {
                         Label(item.id!.uuidString, systemImage: "number.square")
@@ -216,8 +228,6 @@ struct EditZYView: View {
                         TextField("描述", text: $desc)
                         Toggle("亮色反转", isOn: $light).toggleStyle(.switch)
                         Toggle("暗色反转", isOn: $dark).toggleStyle(.switch)
-                        
-                       
                     }.padding()
                     HStack {
                         Spacer()
@@ -229,8 +239,6 @@ struct EditZYView: View {
                     }
                 }
             }
-            
-
         }
         .padding()
         .onDisappear {
@@ -242,6 +250,5 @@ struct EditZYView: View {
             item.save()
             debugPrint("\(self.name) \(self.desc) \(self.light) \(self.dark)")
         }
-
     }
 }
