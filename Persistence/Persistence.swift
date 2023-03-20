@@ -106,7 +106,7 @@ struct PersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
-    static func fillDefaultContent(context: NSManagedObjectContext) -> Int {
+    static private func fillDefaultContent(context: NSManagedObjectContext) -> Int {
         guard let urls = Bundle.main.urls(forResourcesWithExtension: "gif", subdirectory: nil) else {
             return 0
         }
@@ -130,17 +130,41 @@ struct PersistenceController {
                 continue
             }
             
-            let newItem = ZhiyinEntity(context: context)
-            _ = newItem.setGIF(data: (try? Data(contentsOf: url))!)
-            newItem.id = UUID()
-            newItem.name = conf.0
-            newItem.desc = "不只因默认只因"
-            newItem.light_invert = conf.1
-            newItem.dark_invert = conf.2
+            let _ = createNewZhiyin(context: context,
+                                    data: (try? Data(contentsOf: url))!,
+                                    id: UUID(),
+                                    name: conf.0,
+                                    desc: "不只因默认只因",
+                                    light_invert: conf.1,
+                                    dark_invert:  conf.2)
             count += 1
         }
         
         return count
+    }
+    
+    static func createNewZhiyin(context: NSManagedObjectContext, data: Data, id: UUID, name: String, desc: String, light_invert: Bool, dark_invert: Bool) -> ZhiyinEntity {
+        let newItem = ZhiyinEntity(context: context)
+        _ = newItem.setGIF(data: data)
+        newItem.id = id
+        newItem.name = name
+        newItem.desc = desc
+        newItem.light_invert = light_invert
+        newItem.dark_invert = dark_invert
+        return newItem
+    }
+    
+    static func createDefaultZhiyin(context: NSManagedObjectContext) -> ZhiyinEntity {
+        guard let url = Bundle.main.url(forResource: "zhiyin", withExtension: "gif") else {
+            fatalError("Lost Resources")
+        }
+        return createNewZhiyin(context: context,
+                               data: (try? Data(contentsOf: url))!,
+                               id: UUID(),
+                               name: "只因",
+                               desc: "新只因",
+                               light_invert: false,
+                               dark_invert: false)
     }
 }
 

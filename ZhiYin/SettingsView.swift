@@ -22,7 +22,6 @@ struct SettingsView: View {
     private var items: FetchedResults<ZhiyinEntity>
     
     @State private var pop = false
-    @State private var newZhiyinPop = false
     
     var body: some View {
         TabView {
@@ -88,10 +87,10 @@ struct SettingsView: View {
                                 }
                         }
                         // 添加新的只因
-                        var newZhiyin: ZhiyinEntity = ZhiyinEntity()
                         Button {
-//                            newZhiyin = ZhiyinEntity(context: viewContext)
-                            newZhiyinPop = true
+                            let newZhiyin = PersistenceController.createDefaultZhiyin(context: viewContext)
+                            currentImageSet = newZhiyin.id?.uuidString
+                            pop = true
                         } label: {
                             HStack {
                                 Label("快加加加加🐔！", systemImage: "plus.square.dashed")
@@ -105,9 +104,6 @@ struct SettingsView: View {
                                 .stroke(Color.secondary)
                             )
                         }.buttonStyle(.plain)
-                            .popover(isPresented: $newZhiyinPop, arrowEdge: Edge.trailing) {
-                                EditZYView(item: newZhiyin)
-                            }
                     }
                     .padding(10)
                     .animation(.spring(response: 0.2))
