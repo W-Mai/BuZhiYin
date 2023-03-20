@@ -145,7 +145,7 @@ struct PersistenceController {
 }
 
 extension ZhiyinEntity {
-    static var defaultImage = #imageLiteral(resourceName: "sssss171.png").cgImage(forProposedRect: nil, context: nil, hints: nil)!;
+    static var defaultImage = #imageLiteral(resourceName: "ZhiyinDefault").cgImage(forProposedRect: nil, context: nil, hints: nil)!
     
     private func getImageOptions() -> NSDictionary {
         return [kCGImageSourceShouldCache as String: NSNumber(value: true),
@@ -190,7 +190,7 @@ extension ZhiyinEntity {
             return ZhiyinEntity.defaultImage
         }
         
-        return CGImageSourceCreateImageAtIndex(img_src, index, getImageOptions())!
+        return CGImageSourceCreateImageAtIndex(img_src, index, getImageOptions()) ?? ZhiyinEntity.defaultImage
     }
     
     func save() {

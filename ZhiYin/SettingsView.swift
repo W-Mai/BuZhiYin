@@ -179,24 +179,14 @@ struct EditButtonWithPopover<Content: View>: View {
 }
 
 struct EditZYView: View {
-    @State private var username: String
-    
     @State var item: ZhiyinEntity
     
-    @State var name: String
-    @State var desc: String
-    @State var light: Bool
-    @State var dark: Bool
+    var name:  Binding<String> { Binding { return item.name!        } set: { item.name         = $0 }}
+    var desc:  Binding<String> { Binding { return item.desc!        } set: { item.desc         = $0 }}
+    var light: Binding<Bool>   { Binding { return item.light_invert } set: { item.light_invert = $0 }}
+    var dark:  Binding<Bool>   { Binding { return item.dark_invert  } set: { item.dark_invert  = $0 }}
     
-    init(item: ZhiyinEntity) {
-        self.item = item
-        self.name = item.name!
-        self.desc = item.desc!
-        self.light = item.light_invert
-        self.dark = item.dark_invert
-        
-        username = item.name!
-    }
+    @State private var isTargeted: Bool = false
     
     var body: some View {
         Form {
@@ -208,14 +198,32 @@ struct EditZYView: View {
                 }
                 .buttonStyle(.plain)
                 .cornerRadius(24)
-                .padding()
+                .padding(8)
                 .background(
                     ZStack {
                         Image(systemName: "plus")
-                        RoundedRectangle(cornerRadius: 24, style: .continuous).stroke(lineWidth: 4)
+                        RoundedRectangle(cornerRadius: 32, style: .continuous).stroke(lineWidth: 4)
                     }.foregroundColor(.accentColor)
                 )
                 .frame(width: 128, height: 128)
+                .onDrop(of: [.gif], isTargeted: $isTargeted) { providers in
+                    debugPrint(providers)
+                    // 只要第一只
+                    guard let provider = providers.first else {
+                        return false
+                    }
+                    
+                    provider.loadDataRepresentation(forTypeIdentifier: kUTTypeGIF as String) { data, error in
+                        if let data = data {
+                            debugPrint(data)
+                            let _ = item.setGIF(data: data)
+                        } else if let error = error {
+                            debugPrint(error.localizedDescription)
+                        }
+                    }
+                    
+                    return true
+                }
                 
                 VStack {
                     Form {
@@ -224,10 +232,10 @@ struct EditZYView: View {
                             .foregroundColor(.secondary)
                         Spacer()
                         
-                        TextField("名字", text: $name)
-                        TextField("描述", text: $desc)
-                        Toggle("亮色反转", isOn: $light).toggleStyle(.switch)
-                        Toggle("暗色反转", isOn: $dark).toggleStyle(.switch)
+                        TextField("名字", text: name)
+                        TextField("描述", text: desc)
+                        Toggle("亮色反转", isOn: light).toggleStyle(.switch)
+                        Toggle("暗色反转", isOn: dark).toggleStyle(.switch)
                     }.padding()
                     HStack {
                         Spacer()
@@ -242,13 +250,7 @@ struct EditZYView: View {
         }
         .padding()
         .onDisappear {
-            item.name = name
-            item.desc = desc
-            item.light_invert = light
-            item.dark_invert = dark
-            
             item.save()
-            debugPrint("\(self.name) \(self.desc) \(self.light) \(self.dark)")
         }
     }
 }
