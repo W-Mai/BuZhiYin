@@ -104,6 +104,27 @@ struct SettingsView: View {
                                 .stroke(Color.secondary)
                             )
                         }.buttonStyle(.plain)
+                        
+                        if items.count == 0 {
+                            Text("或者")
+                            Button {
+                                _ = PersistenceController.fillDefaultContent(context: viewContext)
+                                _ = PersistenceController.save(context: viewContext)
+                                currentImageSet = "EF2FA09B-20C4-4078-84AD-6879DF5D2DC5"
+                            } label: {
+                                HStack {
+                                    Label("添加默认小只因！", systemImage: "plus.square")
+                                }
+                                .padding(8)
+                                .background(Color.secondary.colorInvert())
+                                .clipShape(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                )
+                                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .stroke(Color.secondary)
+                                )
+                            }.buttonStyle(.plain)
+                        }
                     }
                     .padding(10)
                     .animation(.spring(response: 0.2))
