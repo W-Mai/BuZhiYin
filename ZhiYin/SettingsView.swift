@@ -22,6 +22,7 @@ struct SettingsView: View {
     private var items: FetchedResults<ZhiyinEntity>
     
     @State private var pop = false
+    @State private var newZhiyinPop = false
     
     var body: some View {
         TabView {
@@ -52,40 +53,64 @@ struct SettingsView: View {
                 }.padding([.horizontal])
                 
                 ScrollView(showsIndicators: false) {
-                    ForEach(items) { item in
-                        let sizeScale = currentImageSet == item.id?.uuidString ? 1.5 : 1
-                        
-                        HStack {
-                            ZYView(entity: item, factor: 0.5).frame(
-                                width: 30 * sizeScale,
-                                height: 30 * sizeScale
-                            )
-                            .cornerRadius(8).animation(.none)
-                            Text(item.name!)
-                            Spacer()
+                    VStack {
+                        ForEach(items) { item in
+                            let sizeScale = currentImageSet == item.id?.uuidString ? 1.5 : 1
                             
-                            if currentImageSet == item.id?.uuidString {
-                                EditButtonWithPopover(isPresented: $pop) {
-                                    EditZYView(item: item)
+                            HStack {
+                                ZYView(entity: item, factor: 0.5).frame(
+                                    width: 30 * sizeScale,
+                                    height: 30 * sizeScale
+                                )
+                                .cornerRadius(8).animation(.none)
+                                Text(item.name!)
+                                Spacer()
+                                
+                                if currentImageSet == item.id?.uuidString {
+                                    EditButtonWithPopover(isPresented: $pop) {
+                                        EditZYView(item: item)
+                                    }
                                 }
+                            }.padding(4)
+                                .background(Color.secondary.colorInvert())
+                                .clipShape(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                )
+                                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .stroke(currentImageSet == item.id?.uuidString
+                                            ? Color.accentColor
+                                            : Color.clear, lineWidth: 2)
+                                )
+                                .frame(height: 32 * sizeScale)
+                                .scaleEffect(currentImageSet == item.id?.uuidString ? 1 : 0.95)
+                                .onTapGesture {
+                                    currentImageSet = item.id?.uuidString
+                                }
+                        }
+                        // 添加新的只因
+                        var newZhiyin: ZhiyinEntity = ZhiyinEntity()
+                        Button {
+//                            newZhiyin = ZhiyinEntity(context: viewContext)
+                            newZhiyinPop = true
+                        } label: {
+                            HStack {
+                                Label("快加加加加🐔！", systemImage: "plus.square.dashed")
                             }
-                        }.padding(4)
+                            .padding(8)
                             .background(Color.secondary.colorInvert())
                             .clipShape(
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                             )
                             .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .stroke(currentImageSet == item.id?.uuidString
-                                        ? Color.accentColor
-                                        : Color.clear, lineWidth: 2)
+                                .stroke(Color.secondary)
                             )
-                            .frame(height: 32 * sizeScale)
-                            .scaleEffect(currentImageSet == item.id?.uuidString ? 1 : 0.95)
-                            .onTapGesture {
-                                currentImageSet = item.id?.uuidString
+                        }.buttonStyle(.plain)
+                            .popover(isPresented: $newZhiyinPop, arrowEdge: Edge.trailing) {
+                                EditZYView(item: newZhiyin)
                             }
-                    }.padding(10)
-                        .animation(.spring(response: 0.2))
+                    }
+                    .padding(10)
+                    .animation(.spring(response: 0.2))
                 }.padding(4)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10, style: .continuous).stroke( Color.gray.opacity(0.2), lineWidth: 2).padding(4)
@@ -181,10 +206,10 @@ struct EditButtonWithPopover<Content: View>: View {
 struct EditZYView: View {
     @State var item: ZhiyinEntity
     
-    var name:  Binding<String> { Binding { return item.name!        } set: { item.name         = $0 }}
-    var desc:  Binding<String> { Binding { return item.desc!        } set: { item.desc         = $0 }}
-    var light: Binding<Bool>   { Binding { return item.light_invert } set: { item.light_invert = $0 }}
-    var dark:  Binding<Bool>   { Binding { return item.dark_invert  } set: { item.dark_invert  = $0 }}
+    private var name:  Binding<String> { Binding { return item.name!        } set: { item.name         = $0 }}
+    private var desc:  Binding<String> { Binding { return item.desc!        } set: { item.desc         = $0 }}
+    private var light: Binding<Bool>   { Binding { return item.light_invert } set: { item.light_invert = $0 }}
+    private var dark:  Binding<Bool>   { Binding { return item.dark_invert  } set: { item.dark_invert  = $0 }}
     
     @State private var isTargeted: Bool = false
     
