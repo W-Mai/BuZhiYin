@@ -208,6 +208,9 @@ struct EditZYView: View {
     private var dark:  Binding<Bool>   { Binding { return item.dark_invert  } set: { item.dark_invert  = $0 }}
     
     @State private var isTargeted: Bool = false
+    @State private var needDeleted: Bool = false
+    
+    @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
         Form {
@@ -261,10 +264,21 @@ struct EditZYView: View {
                     HStack {
                         Spacer()
                         Button {
-                            
+                            needDeleted = true
                         } label: {
                             Label("删掉我呗😭", systemImage: "trash").foregroundColor(.red)
+                        }.popover(isPresented: $needDeleted) {
+                            HStack {
+                                Button {
+                                    viewContext.delete(item)
+                                } label: {
+                                    Image(systemName: "arrowshape.right.fill")
+                                    Label("啊啊啊！再点我一下就真的删掉了啊喂！！", systemImage: "trash").foregroundColor(.red)
+                                    Image(systemName: "arrowshape.left.fill")
+                                }.padding().buttonStyle(.plain)
+                            }
                         }
+
                     }
                 }
             }
