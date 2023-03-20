@@ -13,15 +13,6 @@ struct PersistenceController {
     static let shared : PersistenceController = {
         let result = PersistenceController()
         let viewContext = result.container.viewContext
-        let fq = ZhiyinEntity.fetchRequest()
-        
-        guard let count = try? viewContext.count(for: fq) else {
-            return result
-        }
-        
-        if count == 0 {
-            _ = fillDefaultContent(context: viewContext)
-        }
         
         do {
             try viewContext.save()
@@ -111,16 +102,16 @@ struct PersistenceController {
             return 0
         }
         let defaultConf = [
-            "mongmong": ("mongmong🐰", false, false),
-            "cat": ("猫砸键盘🐱", false, false),
-            "gojo_satoru": ("五条梧🥷", false, false),
-            "pink_cat": ("粉色猫猫🐱", false, false),
-            "zhiyin_basketball": ("只因篮球🏀", false, true),
-            "big_mouse_frog": ("大嘴🐸", false, false),
-            "xiaolan_turn": ("小蓝转圈圈♿️", false, false),
-            "karby": ("星之卡比", false, false),
-            "txbb": ("天线宝宝👶", false, false),
-            "zhiyin": ("只因铁山靠⛰️", false, true)
+            "mongmong":             ("CA7AC4E7-3064-41C7-9D82-C2FDB5740217", false, false, "mongmong🐰"),
+            "cat":                  ("CF24D359-0583-4090-A8A0-E29C9AB70F7C", false, false, "猫砸键盘🐱"),
+            "gojo_satoru":          ("05546D59-C6D8-4A5D-B962-232D1524168E", false, false, "五条梧🥷"),
+            "pink_cat":             ("B4328AC3-5877-42A3-B968-50E85DB3C94A", false, false, "粉色猫猫🐱"),
+            "zhiyin_basketball":    ("C886E4B9-101C-419D-A7C6-1DC574C56415", false, true,  "只因篮球🏀"),
+            "big_mouse_frog":       ("65009A78-3099-4AD0-9F61-2AFD755E40BD", false, false, "大嘴🐸"),
+            "xiaolan_turn":         ("760F7EF7-86AE-4D09-91F0-9A4F29B6DC32", false, false, "小蓝转圈圈♿️" ),
+            "karby":                ("D7DF9595-F3FC-4A4F-A134-8F9CED4B761D", false, false, "星之卡比"),
+            "txbb":                 ("076C5D49-7F6B-440B-AEC5-A95DF934B8DA", false, false, "天线宝宝👶"),
+            "zhiyin":               ("EF2FA09B-20C4-4078-84AD-6879DF5D2DC5", false, true,  "只因铁山靠⛰️")
         ]
         
         var count = 0
@@ -130,22 +121,56 @@ struct PersistenceController {
                 continue
             }
             
-            let newItem = ZhiyinEntity(context: context)
-            _ = newItem.setGIF(data: (try? Data(contentsOf: url))!)
-            newItem.id = UUID()
-            newItem.name = conf.0
-            newItem.desc = "不只因默认只因"
-            newItem.light_invert = conf.1
-            newItem.dark_invert = conf.2
+            let _ = createNewZhiyin(context: context,
+                                    data: (try? Data(contentsOf: url))!,
+                                    id: UUID(uuidString: conf.0)!,
+                                    name: conf.3,
+                                    desc: "不只因默认只因",
+                                    light_invert: conf.1,
+                                    dark_invert:  conf.2)
             count += 1
         }
         
         return count
     }
+    
+    static func createNewZhiyin(context: NSManagedObjectContext, data: Data, id: UUID, name: String, desc: String, light_invert: Bool, dark_invert: Bool) -> ZhiyinEntity {
+        let newItem = ZhiyinEntity(context: context)
+        _ = newItem.setGIF(data: data)
+        newItem.id = id
+        newItem.name = name
+        newItem.desc = desc
+        newItem.light_invert = light_invert
+        newItem.dark_invert = dark_invert
+        return newItem
+    }
+    
+    static func createDefaultZhiyin(context: NSManagedObjectContext) -> ZhiyinEntity {
+        guard let url = Bundle.main.url(forResource: "zhiyin", withExtension: "gif") else {
+            fatalError("Lost Resources")
+        }
+        return createNewZhiyin(context: context,
+                               data: (try? Data(contentsOf: url))!,
+                               id: UUID(),
+                               name: "只因",
+                               desc: "新只因",
+                               light_invert: false,
+                               dark_invert: false)
+    }
+    
+    static func save(context: NSManagedObjectContext) -> Bool {
+        do {
+            try context.save()
+            return true
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
 }
 
 extension ZhiyinEntity {
-    static var defaultImage = #imageLiteral(resourceName: "sssss171.png").cgImage(forProposedRect: nil, context: nil, hints: nil)!;
+    static var defaultImage = #imageLiteral(resourceName: "ZhiyinDefault").cgImage(forProposedRect: nil, context: nil, hints: nil)!
     
     private func getImageOptions() -> NSDictionary {
         return [kCGImageSourceShouldCache as String: NSNumber(value: true),
@@ -190,6 +215,16 @@ extension ZhiyinEntity {
             return ZhiyinEntity.defaultImage
         }
         
-        return CGImageSourceCreateImageAtIndex(img_src, index, getImageOptions())!
+        return CGImageSourceCreateImageAtIndex(img_src, index, getImageOptions()) ?? ZhiyinEntity.defaultImage
+    }
+    
+    func save() {
+        let viewContext = PersistenceController.shared.container.viewContext
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
     }
 }

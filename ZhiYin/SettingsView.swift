@@ -21,6 +21,8 @@ struct SettingsView: View {
         animation: .default)
     private var items: FetchedResults<ZhiyinEntity>
     
+    @State private var pop = false
+    
     var body: some View {
         TabView {
             VStack {
@@ -42,43 +44,93 @@ struct SettingsView: View {
                     }
                     Toggle("自动反转播放", isOn: $autoReverse).toggleStyle(.switch)
                     Toggle("速度正比CPU", isOn: $speedProportional).toggleStyle(.switch)
-                    HStack {
+                    
+                    Slider(value: $playSpeed) {
                         Text("只因速")
-                        Slider(value: $playSpeed)
                     }
+                    
                 }.padding([.horizontal])
                 
-                ScrollView {
-                    ForEach(items) { item in
-                        let sizeScale = currentImageSet == item.id?.uuidString ? 1.5 : 1
-                        HStack {
-                            ZYView(entity: item, factor: 0.5).frame(
-                                width: 30 * sizeScale,
-                                height: 30 * sizeScale
-                            )
-                            .cornerRadius(8).animation(.none)
-                            Text(item.name!)
-                            Spacer()
-                        }.padding(4)
+                ScrollView(showsIndicators: false) {
+                    VStack {
+                        ForEach(items) { item in
+                            let sizeScale = currentImageSet == item.id?.uuidString ? 1.5 : 1
+                            
+                            HStack {
+                                ZYView(entity: item, factor: 0.5).frame(
+                                    width: 30 * sizeScale,
+                                    height: 30 * sizeScale
+                                )
+                                .cornerRadius(8).animation(.none)
+                                Text(item.name!)
+                                Spacer()
+                                
+                                if currentImageSet == item.id?.uuidString {
+                                    EditButtonWithPopover(isPresented: $pop) {
+                                        EditZYView(item: item)
+                                    }
+                                }
+                            }.padding(4)
+                                .background(Color.secondary.colorInvert())
+                                .clipShape(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                )
+                                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .stroke(currentImageSet == item.id?.uuidString
+                                            ? Color.accentColor
+                                            : Color.clear, lineWidth: 2)
+                                )
+                                .frame(height: 32 * sizeScale)
+                                .scaleEffect(currentImageSet == item.id?.uuidString ? 1 : 0.95)
+                                .onTapGesture {
+                                    currentImageSet = item.id?.uuidString
+                                }
+                        }
+                        // 添加新的只因
+                        Button {
+                            let newZhiyin = PersistenceController.createDefaultZhiyin(context: viewContext)
+                            currentImageSet = newZhiyin.id?.uuidString
+                            pop = true
+                        } label: {
+                            HStack {
+                                Label("快加加加加🐔！", systemImage: "plus.square.dashed")
+                            }
+                            .padding(8)
                             .background(Color.secondary.colorInvert())
                             .clipShape(
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                             )
                             .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .stroke(currentImageSet == item.id?.uuidString
-                                        ? Color.accentColor
-                                        : Color.clear, lineWidth: 2)
+                                .stroke(Color.secondary)
                             )
-                            .frame(height: 32 * sizeScale)
-                            .scaleEffect(currentImageSet == item.id?.uuidString ? 1 : 0.95)
-                            .onTapGesture {
-                                currentImageSet = item.id?.uuidString
-                            }
-                    }.padding(10)
-                        .animation(.spring(response: 0.2))
+                        }.buttonStyle(.plain)
+                        
+                        if items.count == 0 {
+                            Text("或者")
+                            Button {
+                                _ = PersistenceController.fillDefaultContent(context: viewContext)
+                                _ = PersistenceController.save(context: viewContext)
+                                currentImageSet = "EF2FA09B-20C4-4078-84AD-6879DF5D2DC5"
+                            } label: {
+                                HStack {
+                                    Label("添加默认小只因！", systemImage: "plus.square")
+                                }
+                                .padding(8)
+                                .background(Color.secondary.colorInvert())
+                                .clipShape(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                )
+                                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .stroke(Color.secondary)
+                                )
+                            }.buttonStyle(.plain)
+                        }
+                    }
+                    .padding(10)
+                    .animation(.spring(response: 0.2))
                 }.padding(4)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous).stroke( Color.gray, lineWidth: 2).padding(4)
+                        RoundedRectangle(cornerRadius: 10, style: .continuous).stroke( Color.gray.opacity(0.2), lineWidth: 2).padding(4)
                     )
                 
             }.frame(width: 300, height: 500)
@@ -144,5 +196,117 @@ struct FriendLinksView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    }
+}
+
+struct EditButtonWithPopover<Content: View>: View {
+    @Binding var isPresented: Bool
+    var content: () -> Content
+    
+    var body: some View {
+        Button {
+            isPresented = true
+        } label: {
+            Image(systemName: "square.and.pencil")
+                .resizable()
+                .foregroundColor(Color.accentColor)
+        }.padding(10)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .aspectRatio(1, contentMode: ContentMode.fit)
+            .buttonStyle(.plain)
+            .popover(isPresented: $isPresented, arrowEdge: Edge.trailing) {
+                content()
+            }
+    }
+}
+
+struct EditZYView: View {
+    @State var item: ZhiyinEntity
+    
+    private var name:  Binding<String> { Binding { return item.name!        } set: { item.name         = $0 }}
+    private var desc:  Binding<String> { Binding { return item.desc!        } set: { item.desc         = $0 }}
+    private var light: Binding<Bool>   { Binding { return item.light_invert } set: { item.light_invert = $0 }}
+    private var dark:  Binding<Bool>   { Binding { return item.dark_invert  } set: { item.dark_invert  = $0 }}
+    
+    @State private var isTargeted: Bool = false
+    @State private var needDeleted: Bool = false
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    var body: some View {
+        Form {
+            HStack {
+                Button {
+                    debugPrint("click ")
+                } label: {
+                    ZYView(entity: item, factor: 0.1)
+                }
+                .buttonStyle(.plain)
+                .cornerRadius(24)
+                .padding(8)
+                .background(
+                    ZStack {
+                        Image(systemName: "plus")
+                        RoundedRectangle(cornerRadius: 32, style: .continuous).stroke(lineWidth: 4)
+                    }.foregroundColor(.accentColor)
+                )
+                .frame(width: 128, height: 128)
+                .onDrop(of: [.gif], isTargeted: $isTargeted) { providers in
+                    debugPrint(providers)
+                    // 只要第一只
+                    guard let provider = providers.first else {
+                        return false
+                    }
+                    
+                    provider.loadDataRepresentation(forTypeIdentifier: kUTTypeGIF as String) { data, error in
+                        if let data = data {
+                            debugPrint(data)
+                            let _ = item.setGIF(data: data)
+                        } else if let error = error {
+                            debugPrint(error.localizedDescription)
+                        }
+                    }
+                    
+                    return true
+                }
+                
+                VStack {
+                    Form {
+                        Label(item.id!.uuidString, systemImage: "number.square")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        
+                        TextField("名字", text: name)
+                        TextField("描述", text: desc)
+                        Toggle("亮色反转", isOn: light).toggleStyle(.switch)
+                        Toggle("暗色反转", isOn: dark).toggleStyle(.switch)
+                    }.padding()
+                    HStack {
+                        Spacer()
+                        Button {
+                            needDeleted = true
+                        } label: {
+                            Label("删掉我呗😭", systemImage: "trash").foregroundColor(.red)
+                        }.popover(isPresented: $needDeleted) {
+                            HStack {
+                                Button {
+                                    viewContext.delete(item)
+                                } label: {
+                                    Image(systemName: "arrowshape.right.fill")
+                                    Label("啊啊啊！再点我一下就真的删掉了啊喂！！", systemImage: "trash").foregroundColor(.red)
+                                    Image(systemName: "arrowshape.left.fill")
+                                }.padding().buttonStyle(.plain)
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        .padding()
+        .onDisappear {
+            item.save()
+        }
     }
 }
