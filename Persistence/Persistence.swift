@@ -111,7 +111,16 @@ struct PersistenceController {
             "xiaolan_turn":         ("760F7EF7-86AE-4D09-91F0-9A4F29B6DC32", false, false, "小蓝转圈圈♿️" ),
             "karby":                ("D7DF9595-F3FC-4A4F-A134-8F9CED4B761D", false, false, "星之卡比"),
             "txbb":                 ("076C5D49-7F6B-440B-AEC5-A95DF934B8DA", false, false, "天线宝宝👶"),
-            "zhiyin":               ("EF2FA09B-20C4-4078-84AD-6879DF5D2DC5", false, true,  "只因铁山靠⛰️")
+            "zhiyin":               ("EF2FA09B-20C4-4078-84AD-6879DF5D2DC5", false, true,  "只因铁山靠⛰️"),
+            "3body":                ("0DC947AB-0D3F-4E6B-9CD1-F457DFF94AA3", false, false, "金凯瑞摇🤘"),
+            "baby_circle":          ("3D875F2D-3C0D-4893-BB88-D04DE9950044", false, false, "可爱小圈圈😲"),
+            "cat2":                 ("998E352C-579D-4D1D-9D53-71B2FA96A297", false, false, "猫砸键盘盘😼"),
+            "cat3":                 ("8A55997C-CC7A-4A99-8F75-534FC8FB5FB8", false, false, "猫猫摇爪😺"),
+            "color_worm":           ("82078124-8DCE-4952-AAB5-7C97D3EBC8A3", false, false, "🌈🐛"),
+            "everonecat0":          ("7DA8BD6D-48EF-4EEB-84D5-B1DB5ECCC136", false, false, "EveroneCat"),
+            "hoshiguma":            ("B668833C-F001-450B-BC19-1A3CF00FAB6E", false, false, "星熊警官🛡️"),
+            "jerry":                ("1E027273-96EE-4C60-A942-A8CD8207DDBD", false, false, "Jerry🐭"),
+            "my0":                  ("41E63F23-2325-4586-AD9D-5D86D633BB5F", false, false, "BenignX"),
         ]
         
         var count = 0
