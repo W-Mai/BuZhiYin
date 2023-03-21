@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct ZhiYinApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    let persistenceController = PersistenceController.shared
+    let persistenceController = PersistenceController.preview
     
     var body: some Scene {
         Settings {
@@ -25,7 +25,7 @@ let iconMinWidth = CGFloat(22);
 import AppKit
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBarItem: NSStatusItem?
-    let persistenceController = PersistenceController.shared
+    let persistenceController = PersistenceController.preview
     
     @objc func exitApp() {
         NSApplication.shared.terminate(nil)
