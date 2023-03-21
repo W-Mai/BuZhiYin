@@ -18,23 +18,115 @@ struct SettingsView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \ZhiyinEntity.id, ascending: true)],
-        animation: .default)
+        animation: .easeInOut)
     private var items: FetchedResults<ZhiyinEntity>
     
     @State private var pop = false
     
     var body: some View {
         TabView {
+
+// MARK: TAB 1 鸡础设置
             VStack {
-                HStack(alignment: .center) {
-                    ZYViewAuto(width: 100, height: 100).animation(.none)
-                }
-                .cornerRadius(20)
-                .padding(5)
-                .background(RoundedRectangle(cornerRadius: 25).colorInvert())
-                .shadow(radius: 1)
-                .animation(.spring(response: 0.3))
-                .padding()
+                ScrollViewReader { scrollView in
+                    ScrollView(showsIndicators: false) {
+                        VStack {
+                            ForEach(items) { item in
+                                let sizeScale = currentImageSet == item.id?.uuidString ? 1.5 : 1
+                                
+                                HStack {
+                                    ZYView(entity: item, factor: currentImageSet == item.id?.uuidString ? 0.1 : 0.5).frame(
+                                        width: 30 * sizeScale,
+                                        height: 30 * sizeScale
+                                    )
+                                    .cornerRadius(8).animation(.none)
+                                    Text(item.name!)
+                                    Spacer()
+                                    
+                                    if currentImageSet == item.id?.uuidString {
+                                        EditButtonWithPopover(isPresented: $pop) {
+                                            EditZYView(item: item)
+                                        }
+                                    }
+                                }
+                                .padding(4)
+                                .background(Color.secondary.colorInvert())
+                                .clipShape(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                )
+                                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .stroke(currentImageSet == item.id?.uuidString
+                                            ? Color.accentColor
+                                            : Color.clear, lineWidth: 2)
+                                )
+                                .frame(height: 32 * sizeScale)
+                                .scaleEffect(currentImageSet == item.id?.uuidString ? 1 : 0.86)
+                                .onTapGesture {
+                                    currentImageSet = item.id?.uuidString
+                                }.id(item.id!.uuidString)
+                            }
+                            .onChange(of: currentImageSet) { newValue in
+                                withAnimation {
+                                    scrollView.scrollTo(currentImageSet, anchor: .center)
+                                }
+                            }
+                            
+                            // 添加新的只因
+                            if items.count == 0 {
+                                Button {
+                                    _ = PersistenceController.fillDefaultContent(context: viewContext)
+                                    _ = PersistenceController.save(context: viewContext)
+                                    currentImageSet = "EF2FA09B-20C4-4078-84AD-6879DF5D2DC5"
+                                } label: {
+                                    HStack {
+                                        Label("添加默认小🐔们！！", systemImage: "plus.square")
+                                            .foregroundColor(.white)
+                                            .frame(maxWidth: .infinity)
+                                    }
+                                    .padding(8)
+                                    .background(Color.accentColor)
+                                    .clipShape(
+                                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    )
+                                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .stroke(Color.accentColor)
+                                    )
+                                }.buttonStyle(.plain)
+                                Text("或者")
+                            }
+                            
+                            Button {
+                                let newZhiyin = PersistenceController.createDefaultZhiyin(context: viewContext)
+                                currentImageSet = newZhiyin.id?.uuidString
+                                pop = true
+                                _ = PersistenceController.save(context: viewContext)
+                            } label: {
+                                HStack {
+                                    Label("+1只🐔！", systemImage: "plus.square.dashed")
+                                }
+                                .padding(8)
+                                .background(Color.secondary.colorInvert())
+                                .clipShape(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                )
+                                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .stroke(Color.secondary)
+                                )
+                            }.buttonStyle(.plain)
+                        }
+                        .padding(10)
+                    }
+                    .padding(4)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .stroke( Color.gray.opacity(0.2), lineWidth: 2)
+                            .padding(4)
+                    ).onAppear {
+                        withAnimation {
+                            scrollView.scrollTo(currentImageSet, anchor: .center)
+                        }
+                    }
+                }.animation(.spring(response: 0.2))
                 
                 Form {
                     Picker(selection: $themeMode, label: Text("主\t题")) {
@@ -48,99 +140,13 @@ struct SettingsView: View {
                     Slider(value: $playSpeed) {
                         Text("只因速")
                     }
-                    
-                }.padding([.horizontal])
-                
-                ScrollView(showsIndicators: false) {
-                    VStack {
-                        ForEach(items) { item in
-                            let sizeScale = currentImageSet == item.id?.uuidString ? 1.5 : 1
-                            
-                            HStack {
-                                ZYView(entity: item, factor: 0.5).frame(
-                                    width: 30 * sizeScale,
-                                    height: 30 * sizeScale
-                                )
-                                .cornerRadius(8).animation(.none)
-                                Text(item.name!)
-                                Spacer()
-                                
-                                if currentImageSet == item.id?.uuidString {
-                                    EditButtonWithPopover(isPresented: $pop) {
-                                        EditZYView(item: item)
-                                    }
-                                }
-                            }.padding(4)
-                                .background(Color.secondary.colorInvert())
-                                .clipShape(
-                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                )
-                                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .stroke(currentImageSet == item.id?.uuidString
-                                            ? Color.accentColor
-                                            : Color.clear, lineWidth: 2)
-                                )
-                                .frame(height: 32 * sizeScale)
-                                .scaleEffect(currentImageSet == item.id?.uuidString ? 1 : 0.95)
-                                .onTapGesture {
-                                    currentImageSet = item.id?.uuidString
-                                }
-                        }
-                        // 添加新的只因
-                        if items.count == 0 {
-                            Button {
-                                _ = PersistenceController.fillDefaultContent(context: viewContext)
-                                _ = PersistenceController.save(context: viewContext)
-                                currentImageSet = "EF2FA09B-20C4-4078-84AD-6879DF5D2DC5"
-                            } label: {
-                                HStack {
-                                    Label("添加默认小🐔们！！", systemImage: "plus.square")
-                                        .foregroundColor(.white)
-                                }
-                                .padding(8)
-                                .background(Color.accentColor)
-                                .clipShape(
-                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                )
-                                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .stroke(Color.accentColor)
-                                )
-                            }.buttonStyle(.plain)
-                            Text("或者")
-                        }
-                        
-                        Button {
-                            let newZhiyin = PersistenceController.createDefaultZhiyin(context: viewContext)
-                            currentImageSet = newZhiyin.id?.uuidString
-                            pop = true
-                            _ = PersistenceController.save(context: viewContext)
-                        } label: {
-                            HStack {
-                                Label("+1只🐔！", systemImage: "plus.square.dashed")
-                            }
-                            .padding(8)
-                            .background(Color.secondary.colorInvert())
-                            .clipShape(
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            )
-                            .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .stroke(Color.secondary)
-                            )
-                        }.buttonStyle(.plain)
-                    }
-                    .padding(10)
-                    .animation(.spring(response: 0.2))
-                }.padding(4)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke( Color.gray.opacity(0.2), lineWidth: 2)
-                            .padding(4)
-                    )
-                
-            }.frame(width: 300, height: 500)
-                .tabItem {Label("鸡础设置", systemImage: "gear")}
-            
-            
+                }.padding()
+            }
+            .padding()
+            .frame(width: 300, height: 400)
+            .tabItem {Label("鸡础设置", systemImage: "gear")}
+
+// MARK: TAB 2 高只因设置
             Form {
                 Form {
                     LaunchAtLogin.Toggle("开🐔自动太美").toggleStyle(.switch)
@@ -148,7 +154,8 @@ struct SettingsView: View {
             }.padding([.vertical])
                 .frame(width: 300)
                 .tabItem {Label("高只因设置", systemImage: "gear.circle")}
-            
+
+// MARK: TAB 3 关于
             Form {
                 Spacer()
                 VStack {
