@@ -91,6 +91,7 @@ struct SettingsView: View {
                             let newZhiyin = PersistenceController.createDefaultZhiyin(context: viewContext)
                             currentImageSet = newZhiyin.id?.uuidString
                             pop = true
+                            _ = PersistenceController.save(context: viewContext)
                         } label: {
                             HStack {
                                 Label("快加加加加🐔！", systemImage: "plus.square.dashed")
