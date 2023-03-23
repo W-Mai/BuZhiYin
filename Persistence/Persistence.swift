@@ -23,7 +23,7 @@ struct PersistenceController {
         return result
     }()
     
-    static var preview: PersistenceController = {
+    static let preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
 
@@ -121,7 +121,7 @@ struct PersistenceController {
         ]
     }
     
-    static func fillDefaultContent(context: NSManagedObjectContext) -> Int {
+    static func fillWithDefault🐔(context: NSManagedObjectContext) -> Int {
         guard let urls = Bundle.main.urls(forResourcesWithExtension: "gif", subdirectory: nil) else {
             return 0
         }
@@ -148,15 +148,43 @@ struct PersistenceController {
         return count
     }
     
+    static func cleanWithDefault🐔(context: NSManagedObjectContext) -> Int {
+        let rq: NSFetchRequest<NSFetchRequestResult> = ZhiyinEntity.fetchRequest()
+        rq.predicate = NSPredicate(format: "id IN %@", 👈Default🐔📃().flatMap({ (key: String, value: (String, Bool, Bool, String)) in
+            return [value.0]
+        }))
+        
+        guard let res = try? context.fetch(rq) else {
+            fatalError("🐔窝出现了问题")
+        }
+        
+        res.forEach { 🐔 in
+            context.delete(🐔 as! ZhiyinEntity)
+        }
+        
+        return 0;
+    }
+    
     static func create🆕🐔(context: NSManagedObjectContext, data: Data, id: UUID, name: String, desc: String, light_invert: Bool, dark_invert: Bool) -> ZhiyinEntity {
-        let newItem = ZhiyinEntity(context: context)
-        _ = newItem.setGIF(data: data)
-        newItem.id = id
-        newItem.name = name
-        newItem.desc = desc
-        newItem.light_invert = light_invert
-        newItem.dark_invert = dark_invert
-        return newItem
+        let rq = ZhiyinEntity.fetchRequest()
+        rq.predicate = NSPredicate(format: "id == %@", id.uuidString)
+        
+        guard let res = try? context.fetch(rq) else {
+            fatalError("🐔窝出现了问题")
+        }
+        
+        if !res.isEmpty {
+            return res.first!
+        }
+        
+        let 🆕🐔 = ZhiyinEntity(context: context)
+        _ = 🆕🐔.setGIF(data: data)
+        🆕🐔.id = id
+        🆕🐔.name = name
+        🆕🐔.desc = desc
+        🆕🐔.light_invert = light_invert
+        🆕🐔.dark_invert = dark_invert
+        return 🆕🐔
     }
     
     static func createDefault🐔(context: NSManagedObjectContext) -> ZhiyinEntity {
