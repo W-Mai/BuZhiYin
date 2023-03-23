@@ -272,14 +272,4 @@ extension ZhiyinEntity {
         
         return CGImageSourceCreateImageAtIndex(img_src, index, getImageOptions()) ?? ZhiyinEntity.defaultImage
     }
-    
-    func save() {
-        let viewContext = PersistenceController.shared.container.viewContext
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-    }
 }

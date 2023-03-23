@@ -359,7 +359,7 @@ struct Edit🐔View: View {
         }
         .padding()
         .onDisappear {
-            item.save()
+            _ = PersistenceController.save(context: viewContext)
         }
     }
 }
