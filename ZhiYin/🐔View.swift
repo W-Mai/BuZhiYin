@@ -1,6 +1,6 @@
 //
-//  ZYView.swift
-//  ZhiYin
+//  🐔View.swift
+//  BuZhiYin
 //
 //  Created by 王小劣 on 2023/1/10.
 //  Collaborator: W-Mai
@@ -36,7 +36,7 @@ struct AutoInvertImage: View {
     }
 }
 
-struct ZYView: View {
+struct 🐔View: View {
     var entity: ZhiyinEntity?
     var factor: Float
     var autoReverse = true
@@ -83,7 +83,7 @@ struct ZYView: View {
     }
 }
 
-struct ZYViewAuto: View {
+struct 🐔ViewAuto: View {
     @StateObject var cpuInfo = CpuUsage()
     
     @Environment(\.managedObjectContext) private var viewContext
@@ -128,7 +128,7 @@ struct ZYViewAuto: View {
                         : Double(cpuInfo.cuse)) / 5 * (1.1 - playSpeed))
         
         VStack {
-            ZYView(
+            🐔View(
                 entity: entity,
                 factor: clamp(factor, lowerBound: minInterval, upperBound: .infinity),
                 autoReverse: autoReverse
@@ -140,6 +140,6 @@ struct ZYViewAuto: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ZYViewAuto(width: 100, height: 100).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        🐔ViewAuto(width: 100, height: 100).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

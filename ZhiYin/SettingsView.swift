@@ -1,6 +1,6 @@
 //
 //  SettingsView.swift
-//  ZhiYin
+//  BuZhiYin
 //
 //  Created by W-Mai on 2023/1/15.
 //
@@ -25,8 +25,8 @@ struct SettingsView: View {
     
     var body: some View {
         TabView {
-            
-            // MARK: TAB 1 鸡础设置
+
+// MARK: TAB 1 鸡础设置
             VStack {
                 ScrollViewReader { scrollView in
                     ScrollView(showsIndicators: false) {
@@ -35,7 +35,7 @@ struct SettingsView: View {
                                 let sizeScale = currentImageSet == item.id?.uuidString ? 1.5 : 1
                                 
                                 HStack {
-                                    ZYView(entity: item, factor: currentImageSet == item.id?.uuidString ? 0.1 : 0.5).frame(
+                                    🐔View(entity: item, factor: currentImageSet == item.id?.uuidString ? 0.1 : 0.5).frame(
                                         width: 30 * sizeScale,
                                         height: 30 * sizeScale
                                     )
@@ -45,7 +45,7 @@ struct SettingsView: View {
                                     
                                     if currentImageSet == item.id?.uuidString {
                                         EditButtonWithPopover(isPresented: $pop) {
-                                            EditZYView(item: item)
+                                            Edit🐔View(item: item)
                                         }
                                     }
                                 }
@@ -96,7 +96,7 @@ struct SettingsView: View {
                             }
                             
                             Button {
-                                let newZhiyin = PersistenceController.createDefaultZhiyin(context: viewContext)
+                                let newZhiyin = PersistenceController.createDefault🐔(context: viewContext)
                                 currentImageSet = newZhiyin.id?.uuidString
                                 pop = true
                                 _ = PersistenceController.save(context: viewContext)
@@ -145,67 +145,17 @@ struct SettingsView: View {
             .padding()
             .frame(width: 300, height: 400)
             .tabItem {Label("鸡础设置", systemImage: "gear")}
-            
-            // MARK: TAB 2 高只因设置
-            VStack(alignment: .leading, spacing: 10) {
-                VStack(alignment: .leading) {
-                    Label("通常", systemImage: "paintbrush").font(.subheadline)
-                    Form {
-                        LaunchAtLogin.Toggle("开🐔自动太美").toggleStyle(.switch).frame(maxWidth: .infinity)
-                    }
-                }
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .stroke( Color.gray.opacity(0.2), lineWidth: 2)
-                )
-                
+
+// MARK: TAB 2 高只因设置
+            Form {
                 Form {
-                    Label("默认🐔", systemImage: "paintbrush").font(.subheadline)
-                    Button {
-                        _ = PersistenceController.fillDefaultContent(context: viewContext)
-                        _ = PersistenceController.save(context: viewContext)
-                        currentImageSet = "EF2FA09B-20C4-4078-84AD-6879DF5D2DC5"
-                    } label: {
-                        HStack {
-                            Label("恢复默认小🐔们！！", systemImage: "plus.square")
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                        }
-                        .padding(8)
-                        .background(Color.accentColor)
-                        .clipShape(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        )
-                    }.buttonStyle(.plain)
-                    
-                    Button {
-                        _ = PersistenceController.fillDefaultContent(context: viewContext)
-                        _ = PersistenceController.save(context: viewContext)
-                        currentImageSet = "EF2FA09B-20C4-4078-84AD-6879DF5D2DC5"
-                    } label: {
-                        HStack {
-                            Label("删除默认小🐔们！！", systemImage: "plus.square")
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                        }
-                        .padding(8)
-                        .background(Color.red.brightness(-0.3))
-                        .clipShape(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        )
-                    }.buttonStyle(.plain)
-                }
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .stroke( Color.gray.opacity(0.2), lineWidth: 2)
-                )
-            }.padding()
+                    LaunchAtLogin.Toggle("开🐔自动太美").toggleStyle(.switch)
+                }.padding([.horizontal])
+            }.padding([.vertical])
                 .frame(width: 300)
                 .tabItem {Label("高只因设置", systemImage: "gear.circle")}
-            
-            // MARK: TAB 3 关于
+
+// MARK: TAB 3 关于
             Form {
                 Spacer()
                 VStack {
@@ -281,7 +231,7 @@ struct EditButtonWithPopover<Content: View>: View {
     }
 }
 
-struct EditZYView: View {
+struct Edit🐔View: View {
     @State var item: ZhiyinEntity
     
     private var name:  Binding<String> { Binding { return item.name!        } set: { item.name         = $0 }}
@@ -300,7 +250,7 @@ struct EditZYView: View {
                 Button {
                     debugPrint("click ")
                 } label: {
-                    ZYView(entity: item, factor: 0.1)
+                    🐔View(entity: item, factor: 0.1)
                 }
                 .buttonStyle(.plain)
                 .cornerRadius(24)

@@ -1,6 +1,6 @@
 //
 //  Persistence.swift
-//  ZhiYin
+//  BuZhiYin
 //
 //  Created by W-Mai on 2023/2/17.
 //
@@ -97,11 +97,8 @@ struct PersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
-    static func fillDefaultContent(context: NSManagedObjectContext) -> Int {
-        guard let urls = Bundle.main.urls(forResourcesWithExtension: "gif", subdirectory: nil) else {
-            return 0
-        }
-        let defaultConf = [
+    static func 👈Default🐔📃() -> [String : (String, Bool, Bool, String)] {
+        return [
             "mongmong":             ("CA7AC4E7-3064-41C7-9D82-C2FDB5740217", false, false, "mongmong🐰"),
             "cat":                  ("CF24D359-0583-4090-A8A0-E29C9AB70F7C", false, false, "猫砸键盘🐱"),
             "gojo_satoru":          ("05546D59-C6D8-4A5D-B962-232D1524168E", false, false, "五条梧🥷"),
@@ -122,15 +119,23 @@ struct PersistenceController {
             "jerry":                ("1E027273-96EE-4C60-A942-A8CD8207DDBD", false, false, "Jerry🐭"),
             "my0":                  ("41E63F23-2325-4586-AD9D-5D86D633BB5F", false, false, "BenignX"),
         ]
+    }
+    
+    static func fillDefaultContent(context: NSManagedObjectContext) -> Int {
+        guard let urls = Bundle.main.urls(forResourcesWithExtension: "gif", subdirectory: nil) else {
+            return 0
+        }
+        
+        let default📃 = 👈Default🐔📃()
         
         var count = 0
         for url in urls {
             let name = url.deletingPathExtension().lastPathComponent
-            guard let conf = defaultConf[name] else {
+            guard let conf = default📃[name] else {
                 continue
             }
             
-            let _ = createNewZhiyin(context: context,
+            let _ = create🆕🐔(context: context,
                                     data: (try? Data(contentsOf: url))!,
                                     id: UUID(uuidString: conf.0)!,
                                     name: conf.3,
@@ -143,7 +148,7 @@ struct PersistenceController {
         return count
     }
     
-    static func createNewZhiyin(context: NSManagedObjectContext, data: Data, id: UUID, name: String, desc: String, light_invert: Bool, dark_invert: Bool) -> ZhiyinEntity {
+    static func create🆕🐔(context: NSManagedObjectContext, data: Data, id: UUID, name: String, desc: String, light_invert: Bool, dark_invert: Bool) -> ZhiyinEntity {
         let newItem = ZhiyinEntity(context: context)
         _ = newItem.setGIF(data: data)
         newItem.id = id
@@ -154,11 +159,11 @@ struct PersistenceController {
         return newItem
     }
     
-    static func createDefaultZhiyin(context: NSManagedObjectContext) -> ZhiyinEntity {
+    static func createDefault🐔(context: NSManagedObjectContext) -> ZhiyinEntity {
         guard let url = Bundle.main.url(forResource: "zhiyin", withExtension: "gif") else {
             fatalError("Lost Resources")
         }
-        return createNewZhiyin(context: context,
+        return create🆕🐔(context: context,
                                data: (try? Data(contentsOf: url))!,
                                id: UUID(),
                                name: "只因",
