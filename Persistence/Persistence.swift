@@ -148,7 +148,7 @@ struct PersistenceController {
         return count
     }
     
-    static func cleanWithDefault🐔(context: NSManagedObjectContext) -> Int {
+    static func cleanWithDefault🐔(context: NSManagedObjectContext) -> Bool {
         let rq: NSFetchRequest<NSFetchRequestResult> = ZhiyinEntity.fetchRequest()
         rq.predicate = NSPredicate(format: "id IN %@", 👈Default🐔📃().flatMap({ (key: String, value: (String, Bool, Bool, String)) in
             return [value.0]
@@ -162,7 +162,20 @@ struct PersistenceController {
             context.delete(🐔 as! ZhiyinEntity)
         }
         
-        return 0;
+        return true;
+    }
+    
+    static func hasDefault🐔(context: NSManagedObjectContext) -> Bool {
+        let rq: NSFetchRequest<NSFetchRequestResult> = ZhiyinEntity.fetchRequest()
+        rq.predicate = NSPredicate(format: "id IN %@", 👈Default🐔📃().flatMap({ (key: String, value: (String, Bool, Bool, String)) in
+            return [value.0]
+        }))
+        
+        guard let res = try? context.fetch(rq) else {
+            fatalError("🐔窝出现了问题")
+        }
+        
+        return res.count != 0
     }
     
     static func create🆕🐔(context: NSManagedObjectContext, data: Data, id: UUID, name: String, desc: String, light_invert: Bool, dark_invert: Bool) -> ZhiyinEntity {

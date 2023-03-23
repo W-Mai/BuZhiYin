@@ -162,34 +162,28 @@ struct SettingsView: View {
                 
                 Form {
                     Label("默认🐔", systemImage: "paintbrush").font(.subheadline)
-                    Button {
-                        _ = PersistenceController.fillWithDefault🐔(context: viewContext)
-                        _ = PersistenceController.save(context: viewContext)
-                        currentImageSet = "EF2FA09B-20C4-4078-84AD-6879DF5D2DC5"
-                    } label: {
-                        HStack {
-                            Label("恢复默认小🐔们！！", systemImage: "plus.square")
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                        }
-                        .padding(8)
-                        .background(Color.accentColor)
-                        .clipShape(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        )
-                    }.buttonStyle(.plain)
+                    
+                    let hasDefault🐔 = PersistenceController.hasDefault🐔(context: viewContext)
+                    let labelName = hasDefault🐔 ? "删除默认小🐔们！！" : "恢复默认小🐔们！！"
+                    let backgroundColor = hasDefault🐔 ? Color.red.brightness(-0.3) : Color.accentColor.brightness(0)
                     
                     Button {
-                        _ = PersistenceController.cleanWithDefault🐔(context: viewContext)
+                        if hasDefault🐔 {
+                            _ = PersistenceController.cleanWithDefault🐔(context: viewContext)
+                        } else {
+                            _ = PersistenceController.fillWithDefault🐔(context: viewContext)
+                            currentImageSet = "EF2FA09B-20C4-4078-84AD-6879DF5D2DC5"
+                        }
                         _ = PersistenceController.save(context: viewContext)
+                        
                     } label: {
                         HStack {
-                            Label("删除默认小🐔们！！", systemImage: "plus.square")
+                            Label(labelName, systemImage: "plus.square")
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
                         }
                         .padding(8)
-                        .background(Color.red.brightness(-0.3))
+                        .background(backgroundColor)
                         .clipShape(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                         )
