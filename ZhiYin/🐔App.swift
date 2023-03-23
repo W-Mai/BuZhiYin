@@ -1,6 +1,6 @@
 //
 //  ZhiYinApp.swift
-//  ZhiYin
+//  BuZhiYin
 //
 //  Created by 王小劣 on 2023/1/9.
 //  Collaborator: W-Mai
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct ZhiYinApp: App {
+struct 🐔App: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
 #if DEBUG
@@ -60,7 +60,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem(title: "设置", action: #selector(openSettings), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "退出", action: #selector(exitApp), keyEquivalent: ""))
         
-        let contentView = ZYViewAuto(width: iconMinWidth, height: iconMinWidth).environment(\.managedObjectContext, persistenceController.container.viewContext)
+        let contentView = 🐔ViewAuto(width: iconMinWidth, height: iconMinWidth).environment(\.managedObjectContext, persistenceController.container.viewContext)
         let mainView = NSHostingView(rootView: contentView)
         mainView.frame = NSRect(x: 0, y: 0, width: iconMinWidth, height: iconMinWidth)
         
