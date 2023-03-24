@@ -7,12 +7,12 @@
 
 <i>巅峰诞生虚伪的拥护，黄昏见证虔诚的信徒。</i>
 
-<a href="https://github.com/W-Mai/BuZhiYin/stargazers"><img src="https://img.shields.io/github/stars/W-Mai/BuZhiYin" alt="Stars Badge"/></a>
-<a href="https://github.com/W-Mai/BuZhiYin/network/members"><img src="https://img.shields.io/github/forks/W-Mai/BuZhiYin" alt="Forks Badge"/></a>
-<a href="https://github.com/W-Mai/BuZhiYin/pulls"><img src="https://img.shields.io/github/issues-pr/W-Mai/BuZhiYin" alt="Pull Requests Badge"/></a>
-<a href="https://github.com/W-Mai/BuZhiYin/issues"><img src="https://img.shields.io/github/issues/W-Mai/BuZhiYin" alt="Issues Badge"/></a>
-<a href="https://github.com/W-Mai/BuZhiYin/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/W-Mai/BuZhiYin?color=2b9348"></a>
-<a href="https://github.com/W-Mai/BuZhiYin/blob/master/LICENSE"><img src="https://img.shields.io/github/license/W-Mai/BuZhiYin?color=2b9348" alt="License Badge"/></a>
+<a href="https://github.com/W-Mai/BuZhiYin/stargazers"><img src="https://img.shields.io/github/stars/W-Mai/BuZhiYin?style=for-the-badge&" alt="Stars Badge"/></a>
+<a href="https://github.com/W-Mai/BuZhiYin/network/members"><img src="https://img.shields.io/github/forks/W-Mai/BuZhiYin?style=for-the-badge&" alt="Forks Badge"/></a>
+<a href="https://github.com/W-Mai/BuZhiYin/pulls"><img src="https://img.shields.io/github/issues-pr/W-Mai/BuZhiYin?style=for-the-badge&" alt="Pull Requests Badge"/></a>
+<a href="https://github.com/W-Mai/BuZhiYin/issues"><img src="https://img.shields.io/github/issues/W-Mai/BuZhiYin?style=for-the-badge&" alt="Issues Badge"/></a>
+<a href="https://github.com/W-Mai/BuZhiYin/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/W-Mai/BuZhiYin?color=2b9348&style=for-the-badge&"></a>
+<a href="https://github.com/W-Mai/BuZhiYin/blob/master/LICENSE"><img src="https://img.shields.io/github/license/W-Mai/BuZhiYin?color=2b9348&style=for-the-badge&" alt="License Badge"/></a>
 
 </div>
 
