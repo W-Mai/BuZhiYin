@@ -1,4 +1,4 @@
-<h1 align="center">不只因</h1>
+<h1 align="center">不只因<img src="ZhiYin/DefaultGIF/zhiyin.gif"></h1>
 <div align="center">
 <img src="https://img.shields.io/static/v1?label=Awesome&message=Project&style=for-the-badge&color=blue&logo=glass" alt="Awesome Badge"/>
 <img src="https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=ZhiYin&style=for-the-badge&color=BC4E99" alt="Star Badge"/>
