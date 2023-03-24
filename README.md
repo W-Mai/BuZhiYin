@@ -16,17 +16,21 @@
 
 </div>
 
+<div align="center">
+<img src="Snapshot/screen_record.gif" width="800px" style="border-radius:10px;box-shadow: 0px 0px 10px #3332; border: 2px solid gray;"/>
+</div>
+
 # 使用截图
 
 <div align="center">
 <div style="display: flex; width: 400px; align-items: start;justify-content: center;">
-<img src="Snapshot/2023-03-24 14.08.21.png">
-<img src="Snapshot/2023-03-24 14.08.25.png">
+<img src="Snapshot/2023-03-24 14.08.21.png" width="300px">
+<img src="Snapshot/2023-03-24 14.08.25.png" width="300px">
 </div>
 
 <div style="display: flex; width: 400px; align-items: start;justify-content: center;">
-<img src="Snapshot/2023-03-24 14.08.26.png">
-<img src="Snapshot/2023-03-24 14.08.27.png">
+<img src="Snapshot/2023-03-24 14.08.26.png" width="300px">
+<img src="Snapshot/2023-03-24 14.08.27.png" width="300px">
 </div>
 </div>
 
