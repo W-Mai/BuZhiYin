@@ -16,6 +16,20 @@
 
 </div>
 
+# 使用截图
+
+<div align="center">
+<div style="display: flex; width: 400px; align-items: start;justify-content: center;">
+<img src="Snapshot/2023-03-24 14.08.21.png">
+<img src="Snapshot/2023-03-24 14.08.25.png">
+</div>
+
+<div style="display: flex; width: 400px; align-items: start;justify-content: center;">
+<img src="Snapshot/2023-03-24 14.08.26.png">
+<img src="Snapshot/2023-03-24 14.08.27.png">
+</div>
+</div>
+
 # 注意
 
 因为一些特殊原因，不只因被App Store下架。up表示非常的难过😫 up想了想还是创建一个交流群，方便后续版本更新
