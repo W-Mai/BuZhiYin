@@ -50,6 +50,7 @@
 		452292EB29C8B10900B291DE /* my0.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = my0.gif; sourceTree = "<group>"; };
 		452292EC29C8B10900B291DE /* everonecat0.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = everonecat0.gif; sourceTree = "<group>"; };
 		4530F017299E9D910056556E /* ZhiYins.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ZhiYins.xcdatamodel; sourceTree = "<group>"; };
+		4575AFB029CF5CFC001816D9 /* PRIVACY */ = {isa = PBXFileReference; lastKnownFileType = text; path = PRIVACY; sourceTree = "<group>"; };
 		4582822929BDFC2600AAFB7B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4582822A29BE07FF00AAFB7B /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		458BE93A299F4CB300CC2D4B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -133,6 +134,7 @@
 		D828C8CD296C25920017BF51 = {
 			isa = PBXGroup;
 			children = (
+				4575AFB029CF5CFC001816D9 /* PRIVACY */,
 				4582822A29BE07FF00AAFB7B /* LICENSE */,
 				4582822929BDFC2600AAFB7B /* README.md */,
 				458BE94229A1101A00CC2D4B /* Utils */,
@@ -407,7 +409,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"ZhiYin/Preview Content\"";
 				DEVELOPMENT_TEAM = 3T73Y2T897;
@@ -443,7 +445,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"ZhiYin/Preview Content\"";
 				DEVELOPMENT_TEAM = 3T73Y2T897;
