@@ -17,7 +17,7 @@ struct SettingsView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \ZhiyinEntity.id, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \ZhiyinEntity.name, ascending: true)],
         animation: .easeInOut)
     private var items: FetchedResults<ZhiyinEntity>
     
