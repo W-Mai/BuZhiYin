@@ -6,6 +6,7 @@
 //  Collaborator: W-Mai
 
 import SwiftUI
+import LaunchAtLogin
 
 @main
 struct 🐔App: App {
@@ -70,6 +71,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusBarItem?.button?.addSubview(mainView)
         statusBarItem?.button?.action = #selector(exitApp)
         
-        openSettings()
+        if !LaunchAtLogin.isEnabled {
+            openSettings()
+        }
     }
 }

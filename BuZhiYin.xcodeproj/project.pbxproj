@@ -20,7 +20,6 @@
 		4530F018299E9D910056556E /* ZhiYins.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4530F016299E9D910056556E /* ZhiYins.xcdatamodeld */; };
 		4575AFB229D040FB001816D9 /* add_zhiyin.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4575AFB129D040FB001816D9 /* add_zhiyin.gif */; };
 		458BE93B299F4CB300CC2D4B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE93A299F4CB300CC2D4B /* Persistence.swift */; };
-		458BE93D299F67DF00CC2D4B /* txbb.gif in Resources */ = {isa = PBXBuildFile; fileRef = 458BE93C299F67DF00CC2D4B /* txbb.gif */; };
 		458BE94129A1101200CC2D4B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE94029A1101200CC2D4B /* Utils.swift */; };
 		45A3125A29AD35490069F735 /* pink_cat.gif in Resources */ = {isa = PBXBuildFile; fileRef = 45A3125329AD35490069F735 /* pink_cat.gif */; };
 		45A3125B29AD35490069F735 /* xiaolan_turn.gif in Resources */ = {isa = PBXBuildFile; fileRef = 45A3125429AD35490069F735 /* xiaolan_turn.gif */; };
@@ -40,7 +39,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		452292E329C8A2D200B291DE /* ee6a64c447a84c7ec46fbc467ad0fec5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = ee6a64c447a84c7ec46fbc467ad0fec5.gif; path = "../../../ZhiYin/refs/img-srcs/origin/ee6a64c447a84c7ec46fbc467ad0fec5.gif"; sourceTree = "<group>"; };
 		452292E429C8B10900B291DE /* jerry.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = jerry.gif; sourceTree = "<group>"; };
 		452292E529C8B10900B291DE /* cat2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cat2.gif; sourceTree = "<group>"; };
 		452292E629C8B10900B291DE /* color_worm.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = color_worm.gif; sourceTree = "<group>"; };
@@ -56,7 +54,6 @@
 		4582822929BDFC2600AAFB7B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4582822A29BE07FF00AAFB7B /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		458BE93A299F4CB300CC2D4B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		458BE93C299F67DF00CC2D4B /* txbb.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = txbb.gif; path = ZhiYin/DefaultGIF/txbb.gif; sourceTree = SOURCE_ROOT; };
 		458BE94029A1101200CC2D4B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		45A3125329AD35490069F735 /* pink_cat.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = pink_cat.gif; sourceTree = "<group>"; };
 		45A3125429AD35490069F735 /* xiaolan_turn.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xiaolan_turn.gif; sourceTree = "<group>"; };
@@ -72,7 +69,7 @@
 		D828C8D9296C25930017BF51 /* 🐔App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🐔App.swift"; sourceTree = "<group>"; };
 		D828C8DD296C25940017BF51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D828C8E0296C25940017BF51 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D828C8E2296C25940017BF51 /* ZhiYin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZhiYin.entitlements; sourceTree = "<group>"; };
+		D828C8E2296C25940017BF51 /* BuZhiYin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BuZhiYin.entitlements; sourceTree = "<group>"; };
 		D83C2A17296C860900697CA3 /* 🐔View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🐔View.swift"; sourceTree = "<group>"; };
 		D83C2A19296C863500697CA3 /* CpuUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuUsage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,11 +122,9 @@
 				45A3125729AD35490069F735 /* cat.gif */,
 				45A3125629AD35490069F735 /* gojo_satoru.gif */,
 				45A3125929AD35490069F735 /* karby.gif */,
-				452292E329C8A2D200B291DE /* ee6a64c447a84c7ec46fbc467ad0fec5.gif */,
 				45A3125329AD35490069F735 /* pink_cat.gif */,
 				45A3125829AD35490069F735 /* mongmong.gif */,
 				45A3125429AD35490069F735 /* xiaolan_turn.gif */,
-				458BE93C299F67DF00CC2D4B /* txbb.gif */,
 			);
 			path = DefaultGIF;
 			sourceTree = "<group>";
@@ -164,7 +159,7 @@
 				D828C8D9296C25930017BF51 /* 🐔App.swift */,
 				D83C2A17296C860900697CA3 /* 🐔View.swift */,
 				D828C8DD296C25940017BF51 /* Assets.xcassets */,
-				D828C8E2296C25940017BF51 /* ZhiYin.entitlements */,
+				D828C8E2296C25940017BF51 /* BuZhiYin.entitlements */,
 				D828C8DF296C25940017BF51 /* Preview Content */,
 			);
 			path = BuZhiYin;
@@ -257,7 +252,6 @@
 				45A3125F29AD35490069F735 /* mongmong.gif in Resources */,
 				452292EF29C8B10900B291DE /* color_worm.gif in Resources */,
 				452292ED29C8B10900B291DE /* jerry.gif in Resources */,
-				458BE93D299F67DF00CC2D4B /* txbb.gif in Resources */,
 				45A3126629AD42080069F735 /* zhiyin_basketball.gif in Resources */,
 				45A3125D29AD35490069F735 /* gojo_satoru.gif in Resources */,
 				D828C8DE296C25940017BF51 /* Assets.xcassets in Resources */,
@@ -408,14 +402,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
-				CODE_SIGN_ENTITLEMENTS = ZhiYin/ZhiYin.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BuZhiYin/BuZhiYin.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"ZhiYin/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BuZhiYin/Preview Content\"";
 				DEVELOPMENT_TEAM = 3T73Y2T897;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -444,14 +437,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
-				CODE_SIGN_ENTITLEMENTS = ZhiYin/ZhiYin.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BuZhiYin/BuZhiYin.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"ZhiYin/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BuZhiYin/Preview Content\"";
 				DEVELOPMENT_TEAM = 3T73Y2T897;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
