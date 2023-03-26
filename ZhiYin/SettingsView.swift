@@ -164,6 +164,7 @@ struct SettingsView: View {
                     Label("默认🐔", systemImage: "paintbrush").font(.subheadline)
                     
                     let hasDefault🐔 = PersistenceController.hasDefault🐔(context: viewContext)
+                    let labelIcon = hasDefault🐔 ? "trash" : "plus.square"
                     let labelName = hasDefault🐔 ? "删除默认小🐔们！！" : "恢复默认小🐔们！！"
                     let backgroundColor = hasDefault🐔 ? Color.red.brightness(-0.3) : Color.accentColor.brightness(0)
                     
@@ -178,7 +179,7 @@ struct SettingsView: View {
                         
                     } label: {
                         HStack {
-                            Label(labelName, systemImage: "plus.square")
+                            Label(labelName, systemImage: labelIcon)
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
                         }
@@ -300,7 +301,7 @@ struct Edit🐔View: View {
                 .padding(8)
                 .background(
                     ZStack {
-                        Image(systemName: "plus")
+//                        Image(systemName: "plus")
                         RoundedRectangle(cornerRadius: 32, style: .continuous).stroke(lineWidth: 4)
                     }.foregroundColor(.accentColor)
                 )
@@ -341,14 +342,14 @@ struct Edit🐔View: View {
                         Button {
                             needDeleted = true
                         } label: {
-                            Label("删掉我呗😭", systemImage: "trash").foregroundColor(.red)
+                            Label("停止练习😭", systemImage: "trash").foregroundColor(.red)
                         }.popover(isPresented: $needDeleted) {
                             HStack {
                                 Button {
                                     viewContext.delete(item)
                                 } label: {
                                     Image(systemName: "arrowshape.right.fill")
-                                    Label("啊啊啊！再点我一下就真的删掉了啊喂！！", systemImage: "trash").foregroundColor(.red)
+                                    Label("啊啊啊！再点一下就真的停止练习了啊喂！！", systemImage: "trash").foregroundColor(.red)
                                     Image(systemName: "arrowshape.left.fill")
                                 }.padding().buttonStyle(.plain)
                             }

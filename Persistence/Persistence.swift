@@ -201,7 +201,7 @@ struct PersistenceController {
     }
     
     static func createDefault🐔(context: NSManagedObjectContext) -> ZhiyinEntity {
-        guard let url = Bundle.main.url(forResource: "zhiyin", withExtension: "gif") else {
+        guard let url = Bundle.main.url(forResource: "add_zhiyin", withExtension: "gif") else {
             fatalError("Lost Resources")
         }
         return create🆕🐔(context: context,
@@ -210,7 +210,7 @@ struct PersistenceController {
                                name: "只因",
                                desc: "新只因",
                                light_invert: false,
-                               dark_invert: false)
+                               dark_invert: true)
     }
     
     static func save(context: NSManagedObjectContext) -> Bool {
