@@ -285,45 +285,53 @@ struct Edit🐔View: View {
     
     @State private var isTargeted: Bool = false
     @State private var needDeleted: Bool = false
+    @State private var isHover: Bool = false
     
     @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
         Form {
             HStack {
-                Button {
-                    debugPrint("click ")
-                } label: {
-                    🐔View(entity: item, factor: 0.1)
-                }
-                .buttonStyle(.plain)
-                .cornerRadius(24)
-                .padding(8)
-                .background(
-                    ZStack {
-//                        Image(systemName: "plus")
-                        RoundedRectangle(cornerRadius: 32, style: .continuous).stroke(lineWidth: 4)
-                    }.foregroundColor(.accentColor)
-                )
-                .frame(width: 128, height: 128)
-                .onDrop(of: [.gif], isTargeted: $isTargeted) { providers in
-                    debugPrint(providers)
-                    // 只要第一只
-                    guard let provider = providers.first else {
-                        return false
+                
+                VStack {
+                    Button {
+                        debugPrint("click ")
+                    } label: {
+                        🐔View(entity: item, factor: 0.1).animation(.none)
                     }
-                    
-                    provider.loadDataRepresentation(forTypeIdentifier: kUTTypeGIF as String) { data, error in
-                        if let data = data {
-                            debugPrint(data)
-                            let _ = item.setGIF(data: data)
-                        } else if let error = error {
-                            debugPrint(error.localizedDescription)
+                    .buttonStyle(.plain)
+                    .cornerRadius(24)
+                    .padding(8)
+                    .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 32, style: .continuous).stroke(lineWidth: 4)
+                        }.foregroundColor(.accentColor)
+                    )
+                    .frame(width: 128, height: 128)
+                    .onDrop(of: [.gif], isTargeted: $isTargeted) { providers in
+                        debugPrint(providers)
+                        // 只要第一只🐔
+                        guard let provider = providers.first else {
+                            return false
                         }
+                        
+                        provider.loadDataRepresentation(forTypeIdentifier: kUTTypeGIF as String) { data, error in
+                            if let data = data {
+                                debugPrint(data)
+                                let _ = item.setGIF(data: data)
+                            } else if let error = error {
+                                debugPrint(error.localizedDescription)
+                            }
+                        }
+                        
+                        return true
+                    }.onHover { hover in
+                        isHover = hover
                     }
-                    
-                    return true
-                }
+                    if isHover {
+                        Text("// 仅接受GIF, 拽到👆").font(.subheadline).foregroundColor(Color(hue: 0.5, saturation: 0.39, brightness: 0.3))
+                    }
+                }.animation(.spring())
                 
                 VStack {
                     Form {
