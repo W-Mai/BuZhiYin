@@ -1,4 +1,4 @@
-<img height="256" src="ZhiYin/Assets.xcassets/AppIcon.appiconset/icon_512x512@2x@2x.png" alt="RunCat for GNOME Shell Logo" align="right"/>
+<img height="256" src="BuZhiYin/Assets.xcassets/AppIcon.appiconset/icon_512x512@2x@2x.png" alt="RunCat for GNOME Shell Logo" align="right"/>
 <div style="display: flex; justify-content: space-between; flex:8">
 <h1 align="left">不只因<img src="ZhiYin/DefaultGIF/zhiyin.gif"/></h1>
 <div align="left">
