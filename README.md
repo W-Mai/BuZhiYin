@@ -17,15 +17,15 @@
 </div>
 </div>
 
-<a href="https://apps.apple.com/app/不只因/id6446803018" target="_blank"> <img src="Snapshot/app-store-badge.png" alt="下载不只因"/> </a>
+<a href="https://apps.apple.com/app/不只因/id6446803018" target="_blank"> <img src="Snapshot/app-store-badge.png" alt="下载不只因" height="80"/> </a>
 
 
 # 使用截图
-
+<br />
 <div align="center">
 <img src="Snapshot/screen_record.gif" style="border-radius:10px;box-shadow: 0px 0px 10px #3332; border: 2px solid gray;"/>
 </div>
-
+<br />
 <div align="center">
 <div style="display: flex; width: 400px; align-items: start;justify-content: center;">
 <img src="Snapshot/2023-03-24 14.08.21.png" width="300px">
@@ -40,7 +40,9 @@
 
 # 注意
 
-因为一些特殊原因，不只因被App Store下架。up表示非常的难过😫 up想了想还是创建一个交流群，方便后续版本更新
+因为一些特殊原因，不只因`曾经`被App Store下架。up表示非常的难过😫
+
+up想了想还是创建一个交流群，方便交流以及后续版本更新
 
 QQ群：
 ```cpp
