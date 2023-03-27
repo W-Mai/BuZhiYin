@@ -11,20 +11,20 @@
 
 <a href="https://github.com/W-Mai/BuZhiYin/stargazers"><img src="https://img.shields.io/github/stars/W-Mai/BuZhiYin?style=for-the-badge&" alt="Stars Badge"/></a>
 <a href="https://github.com/W-Mai/BuZhiYin/network/members"><img src="https://img.shields.io/github/forks/W-Mai/BuZhiYin?style=for-the-badge&" alt="Forks Badge"/></a>
-<a href="https://github.com/W-Mai/BuZhiYin/pulls"><img src="https://img.shields.io/github/issues-pr/W-Mai/BuZhiYin?style=for-the-badge&" alt="Pull Requests Badge"/></a>
 <a href="https://github.com/W-Mai/BuZhiYin/issues"><img src="https://img.shields.io/github/issues/W-Mai/BuZhiYin?style=for-the-badge&" alt="Issues Badge"/></a>
-<a href="https://github.com/W-Mai/BuZhiYin/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/W-Mai/BuZhiYin?color=2b9348&style=for-the-badge&"></a>
 <a href="https://github.com/W-Mai/BuZhiYin/blob/master/LICENSE"><img src="https://img.shields.io/github/license/W-Mai/BuZhiYin?color=2b9348&style=for-the-badge&" alt="License Badge"/></a>
 
 </div>
 </div>
 
+<a href="https://apps.apple.com/app/不只因/id6446803018" target="_blank"> <img src="Snapshot/app-store-badge.png" alt="下载不只因"/> </a>
+
+
+# 使用截图
 
 <div align="center">
 <img src="Snapshot/screen_record.gif" style="border-radius:10px;box-shadow: 0px 0px 10px #3332; border: 2px solid gray;"/>
 </div>
-
-# 使用截图
 
 <div align="center">
 <div style="display: flex; width: 400px; align-items: start;justify-content: center;">
