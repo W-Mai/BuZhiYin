@@ -1,6 +1,6 @@
 <img height="256" src="BuZhiYin/Assets.xcassets/AppIcon.appiconset/icon_512x512@2x@2x.png" alt="RunCat for GNOME Shell Logo" align="right"/>
 <div style="display: flex; justify-content: space-between; flex:8">
-<h1 align="left">不只因<img src="ZhiYin/DefaultGIF/zhiyin.gif"/></h1>
+<h1 align="left">不只因<img src="BuZhiYin/DefaultGIF/zhiyin.gif"/></h1>
 <div align="left">
 <img src="https://img.shields.io/static/v1?label=Awesome&message=Project&style=for-the-badge&color=blue&logo=glass" alt="Awesome Badge"/>
 <img src="https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=ZhiYin&style=for-the-badge&color=BC4E99" alt="Star Badge"/>
