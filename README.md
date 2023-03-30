@@ -17,7 +17,7 @@
 </div>
 </div>
 
-<a href="https://apps.apple.com/app/不只因/id6446803018" target="_blank"> <img src="Snapshot/app-store-badge.png" alt="下载不只因" height="80"/> </a>
+<a href="https://apps.apple.com/app/apple-store/id6446803018?pt=126160538&ct=github&mt=8" target="_blank"> <img src="Snapshot/app-store-badge.png" alt="下载不只因" height="80"/> </a>
 
 
 # 使用截图
