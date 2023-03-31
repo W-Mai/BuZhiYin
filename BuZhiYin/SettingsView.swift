@@ -21,6 +21,7 @@ struct SettingsView: View {
         animation: .easeInOut)
     private var items: FetchedResults<ZhiyinEntity>
     
+    @State private var isPresented = false
     @State private var pop = false
     
     var body: some View {
@@ -28,105 +29,106 @@ struct SettingsView: View {
             
             // MARK: TAB 1 鸡础设置
             VStack {
-                ScrollViewReader { scrollView in
-                    ScrollView(showsIndicators: false) {
-                        VStack {
-                            ForEach(items) { item in
-                                let sizeScale = currentImageSet == item.id?.uuidString ? 1.5 : 1
-                                
-                                HStack {
-                                    🐔View(entity: item, factor: currentImageSet == item.id?.uuidString ? 0.1 : 0.5).frame(
-                                        width: 30 * sizeScale,
-                                        height: 30 * sizeScale
-                                    )
-                                    .cornerRadius(8).animation(.none)
-                                    Text(item.name!)
-                                    Spacer()
+                if isPresented {
+                    ScrollViewReader { scrollView in
+                        ScrollView(showsIndicators: false) {
+                            VStack {
+                                ForEach(items) { item in
+                                    let sizeScale = currentImageSet == item.id?.uuidString ? 1.5 : 1
                                     
-                                    if currentImageSet == item.id?.uuidString {
-                                        EditButtonWithPopover(isPresented: $pop) {
-                                            Edit🐔View(item: item)
+                                    HStack {
+                                        🐔View(entity: item, factor: currentImageSet == item.id?.uuidString ? 0.1 : 0.5).frame(
+                                            width: 30 * sizeScale,
+                                            height: 30 * sizeScale
+                                        )
+                                        .cornerRadius(8).animation(.none)
+                                        Text(item.name!)
+                                        Spacer()
+                                        
+                                        if currentImageSet == item.id?.uuidString {
+                                            EditButtonWithPopover(isPresented: $pop) {
+                                                Edit🐔View(item: item)
+                                            }
                                         }
                                     }
-                                }
-                                .padding(4)
-                                .background(Color.secondary.colorInvert())
-                                .clipShape(
-                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                )
-                                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .stroke(currentImageSet == item.id?.uuidString
-                                            ? Color.accentColor
-                                            : Color.clear, lineWidth: 2)
-                                )
-                                .frame(height: 32 * sizeScale)
-                                .scaleEffect(currentImageSet == item.id?.uuidString ? 1 : 0.86)
-                                .onTapGesture {
-                                    currentImageSet = item.id?.uuidString
-                                }.id(item.id!.uuidString)
-                            }
-                            .onChange(of: currentImageSet) { newValue in
-                                withAnimation {
-                                    scrollView.scrollTo(currentImageSet, anchor: .center)
-                                }
-                            }
-                            
-                            // 添加新的只因
-                            if items.count == 0 {
-                                Button {
-                                    _ = PersistenceController.fillWithDefault🐔(context: viewContext)
-                                    _ = PersistenceController.save(context: viewContext)
-                                    currentImageSet = "EF2FA09B-20C4-4078-84AD-6879DF5D2DC5"
-                                } label: {
-                                    HStack {
-                                        Label("添加默认小🐔们！！", systemImage: "plus.square")
-                                            .foregroundColor(.white)
-                                            .frame(maxWidth: .infinity)
-                                    }
-                                    .padding(8)
-                                    .background(Color.accentColor)
+                                    .padding(4)
+                                    .background(Color.secondary.colorInvert())
                                     .clipShape(
                                         RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     )
                                     .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                        .stroke(Color.accentColor)
+                                        .stroke(currentImageSet == item.id?.uuidString
+                                                ? Color.accentColor
+                                                : Color.clear, lineWidth: 2)
+                                    )
+                                    .frame(height: 32 * sizeScale)
+                                    .scaleEffect(currentImageSet == item.id?.uuidString ? 1 : 0.86)
+                                    .onTapGesture {
+                                        currentImageSet = item.id?.uuidString
+                                    }.id(item.id!.uuidString)
+                                }
+                                .onChange(of: currentImageSet) { newValue in
+                                    withAnimation {
+                                        scrollView.scrollTo(currentImageSet, anchor: .center)
+                                    }
+                                }
+                                
+                                // 添加新的只因
+                                if items.count == 0 {
+                                    Button {
+                                        _ = PersistenceController.fillWithDefault🐔(context: viewContext)
+                                        _ = PersistenceController.save(context: viewContext)
+                                        currentImageSet = "EF2FA09B-20C4-4078-84AD-6879DF5D2DC5"
+                                    } label: {
+                                        HStack {
+                                            Label("添加默认小🐔们！！", systemImage: "plus.square")
+                                                .foregroundColor(.white)
+                                                .frame(maxWidth: .infinity)
+                                        }
+                                        .padding(8)
+                                        .background(Color.accentColor)
+                                        .clipShape(
+                                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        )
+                                        .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                            .stroke(Color.accentColor)
+                                        )
+                                    }.buttonStyle(.plain)
+                                    Text("或者")
+                                }
+                                
+                                Button {
+                                    let newZhiyin = PersistenceController.createDefault🐔(context: viewContext)
+                                    currentImageSet = newZhiyin.id?.uuidString
+                                    pop = true
+                                    _ = PersistenceController.save(context: viewContext)
+                                } label: {
+                                    HStack {
+                                        Label("+1只🐔！", systemImage: "plus.square.dashed")
+                                    }
+                                    .padding(8)
+                                    .background(Color.secondary.colorInvert())
+                                    .clipShape(
+                                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    )
+                                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .stroke(Color.secondary)
                                     )
                                 }.buttonStyle(.plain)
-                                Text("或者")
                             }
-                            
-                            Button {
-                                let newZhiyin = PersistenceController.createDefault🐔(context: viewContext)
-                                currentImageSet = newZhiyin.id?.uuidString
-                                pop = true
-                                _ = PersistenceController.save(context: viewContext)
-                            } label: {
-                                HStack {
-                                    Label("+1只🐔！", systemImage: "plus.square.dashed")
-                                }
-                                .padding(8)
-                                .background(Color.secondary.colorInvert())
-                                .clipShape(
-                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                )
-                                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .stroke(Color.secondary)
-                                )
-                            }.buttonStyle(.plain)
+                            .padding(10)
                         }
-                        .padding(10)
-                    }
-                    .padding(4)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke( Color.gray.opacity(0.2), lineWidth: 2)
-                            .padding(4)
-                    ).onAppear {
-                        withAnimation {
-                            scrollView.scrollTo(currentImageSet, anchor: .center)
+                        .padding(4)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .stroke( Color.gray.opacity(0.2), lineWidth: 2)
+                                .padding(4)
+                        ).onAppear {
+                            withAnimation {
+                                scrollView.scrollTo(currentImageSet, anchor: .center)
+                            }
                         }
-                    }
-                }.animation(.spring(response: 0.2))
+                    }.animation(.spring(response: 0.2))}
                 
                 Form {
                     Picker(selection: $themeMode, label: Text("主\t题")) {
@@ -213,6 +215,30 @@ struct SettingsView: View {
             }.padding([.vertical]).frame(width: 300, height: 360)
                 .tabItem {Label("关于", systemImage: "info.circle.fill")}
         }
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didBecomeKeyNotification), perform: { notification in
+            guard let window = notification.object as? NSWindow else { return }
+            if window.styleMask.contains(.titled) {
+                debugPrint("俺出来了！")
+                debugPrint(notification)
+                debugPrint(window.identifier?.rawValue ?? "")
+                
+                if window.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" {
+                    isPresented = true
+                }
+            }
+        })
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.willCloseNotification), perform: { notification in
+            guard let window = notification.object as? NSWindow else { return }
+            if window.styleMask.contains(.titled) {
+                debugPrint("俺回去了！")
+                debugPrint(notification)
+                debugPrint(window.identifier?.rawValue ?? "")
+                
+                if window.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" {
+                    isPresented = false
+                }
+            }
+        })
     }
 }
 
