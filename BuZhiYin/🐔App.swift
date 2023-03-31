@@ -40,7 +40,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func exitApp() {
         NSApplication.shared.terminate(nil)
-        NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
     }
     
     @objc func openSettings() {
