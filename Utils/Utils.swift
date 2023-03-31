@@ -23,6 +23,6 @@ func clamp<T: Comparable>(_ value: T, lowerBound: T, upperBound: T) -> T {
 
 func friendLinks() -> [FriendLinkInfo]{
     return [
-        FriendLinkInfo(icon: "MenubarX", title: "MenubarX", desc: "一款强大的菜单栏浏览器", link: URL(string: "macappstore://apps.apple.com/cn/app/id1575588022?mt=8&ct=app")!),
+        FriendLinkInfo(icon: "MenubarX", title: "MenubarX", desc: "一款强大的菜单栏浏览器", link: URL(string: "macappstore://apps.apple.com/app/apple-store/id1575588022?pt=2177920&ct=app&mt=8")!),
     ]
 }
