@@ -199,7 +199,7 @@ struct SettingsView: View {
                 )
             }.padding()
                 .frame(width: 300)
-                .tabItem {Label("高只因设置", systemImage: "gear.circle")}
+                .tabItem {Label("高只因设置", systemImage: "gearshape.2")}
             
             // MARK: TAB 3 关于
             Form {
@@ -221,8 +221,11 @@ struct SettingsView: View {
                 debugPrint("俺出来了！")
                 debugPrint(notification)
                 debugPrint(window.identifier?.rawValue ?? "")
-                
-                if window.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" {
+                if #available(macOS 13, *) {
+                    if window.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" {
+                        isPresented = true
+                    }
+                } else {
                     isPresented = true
                 }
             }
@@ -233,9 +236,12 @@ struct SettingsView: View {
                 debugPrint("俺回去了！")
                 debugPrint(notification)
                 debugPrint(window.identifier?.rawValue ?? "")
-                
-                if window.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" {
-                    isPresented = false
+                if #available(macOS 13, *) {
+                    if window.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" {
+                        isPresented = false
+                    }
+                } else {
+                    isPresented = true
                 }
             }
         })
