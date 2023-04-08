@@ -7,6 +7,7 @@
 
 import SwiftUI
 import LaunchAtLogin
+import UniformTypeIdentifiers
 
 struct SettingsView: View {
     @AppStorage("AutoReverse") private var autoReverse = true
@@ -340,24 +341,8 @@ struct Edit🐔View: View {
                         }.foregroundColor(.accentColor)
                     )
                     .frame(width: 128, height: 128)
-                    .onDrop(of: [.gif], isTargeted: $isTargeted) { providers in
-                        debugPrint(providers)
-                        // 只要第一只🐔
-                        guard let provider = providers.first else {
-                            return false
-                        }
-                        
-                        provider.loadDataRepresentation(forTypeIdentifier: kUTTypeGIF as String) { data, error in
-                            if let data = data {
-                                debugPrint(data)
-                                let _ = item.setGIF(data: data)
-                            } else if let error = error {
-                                debugPrint(error.localizedDescription)
-                            }
-                        }
-                        
-                        return true
-                    }.onHover { hover in
+                    .onDrop(of: [.fileURL], delegate: GifDropDelegate())
+                    .onHover { hover in
                         isHover = hover
                     }
                     if isHover {
