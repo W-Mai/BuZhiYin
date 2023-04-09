@@ -33,17 +33,14 @@ struct GifDropModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .onDrop(of: [.gif, .fileURL], delegate: Delegate(🐔))
+            .onDrop(of: [.fileURL], delegate: Delegate(🐔))
     }
     
     struct Delegate: DropDelegate {
         var 🐔: ZhiyinEntity
         
-        private var changing_url: URL?
-        
         init(_ 🐔: ZhiyinEntity) {
             self.🐔 = 🐔
-            self.changing_url = nil
         }
         
         func getURLFromInfo(info: DropInfo) -> URL? {
@@ -80,8 +77,9 @@ struct GifDropModifier: ViewModifier {
             return url_ret
         }
         
-        mutating func validateDrop(info: DropInfo) -> Bool {
+        func validateDrop(info: DropInfo) -> Bool {
             if info.hasItemsConforming(to: [.gif]) {
+                debugPrint("GIF get")
                 return true
             }
             
@@ -93,14 +91,40 @@ struct GifDropModifier: ViewModifier {
             
             debugPrint("File type: \(fileType)")
             let isGif = fileType == "gif"
-            if isGif {
-                changing_url = url
-            }
             
             return isGif
         }
         
         func performDrop(info: DropInfo) -> Bool {
+            let providers = info.itemProviders(for: [.fileURL, .gif])
+            debugPrint(providers)
+            // 只要第一只🐔
+            guard let provider = providers.first else {
+                return false
+            }
+            
+            if info.hasItemsConforming(to: [.gif]) {
+                provider.loadDataRepresentation(forTypeIdentifier: UTType.gif.identifier) { data, error in
+                    if let data = data {
+                        debugPrint(data)
+                        let _ = 🐔.setGIF(data: data)
+                    } else if let error = error {
+                        debugPrint(error.localizedDescription)
+                    }
+                }
+            } else if info.hasItemsConforming(to: [.fileURL]) {
+                guard let url = getURLFromInfo(info: info) else {
+                    return false
+                }
+                
+                let data = try? Data(contentsOf: url)
+                
+                if let data = data {
+                    debugPrint(data)
+                    let _ = 🐔.setGIF(data: data)
+                }
+            }
+            
             return true
         }
     }
