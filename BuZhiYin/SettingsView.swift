@@ -341,7 +341,7 @@ struct Edit🐔View: View {
                         }.foregroundColor(.accentColor)
                     )
                     .frame(width: 128, height: 128)
-                    .onDrop(of: [.fileURL], delegate: GifDropDelegate())
+                    .modifier(GifDropModifier(🐔: $item))
                     .onHover { hover in
                         isHover = hover
                     }

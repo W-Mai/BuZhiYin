@@ -28,58 +28,80 @@ func friendLinks() -> [FriendLinkInfo]{
     ]
 }
 
-struct GifDropDelegate: DropDelegate {
-    func getURLFromInfo(info: DropInfo) -> URL? {
-        if !info.hasItemsConforming(to: [.fileURL]) {
-            return nil
-        }
-        
-        guard let provider = info.itemProviders(for: [.fileURL]).first else {
-            return nil
-        }
-        var url_ret: URL? = nil
-        let sema = DispatchSemaphore(value: 0)
-        debugPrint(provider)
-        
-        if provider.canLoadObject(ofClass: NSURL.self) {
-            provider.loadObject(ofClass: NSURL.self) { (url, error) in
-                defer {
-                    sema.signal()
-                }
-                
-                guard error == nil else {
-                    print("Error loading item: \(error!)")
-                    return
-                }
-
-                guard let url = url as? URL else {
-                    return
-                }
-                
-                url_ret = url
-            }
-            sema.wait()
-        }
-        return url_ret
+struct GifDropModifier: ViewModifier {
+    @Binding var 🐔: ZhiyinEntity
+    
+    func body(content: Content) -> some View {
+        content
+            .onDrop(of: [.gif, .fileURL], delegate: Delegate(🐔))
     }
     
-    func validateDrop(info: DropInfo) -> Bool {
-        if info.hasItemsConforming(to: [.gif]) {
+    struct Delegate: DropDelegate {
+        var 🐔: ZhiyinEntity
+        
+        private var changing_url: URL?
+        
+        init(_ 🐔: ZhiyinEntity) {
+            self.🐔 = 🐔
+            self.changing_url = nil
+        }
+        
+        func getURLFromInfo(info: DropInfo) -> URL? {
+            if !info.hasItemsConforming(to: [.fileURL]) {
+                return nil
+            }
+            
+            guard let provider = info.itemProviders(for: [.fileURL]).first else {
+                return nil
+            }
+            var url_ret: URL? = nil
+            let sema = DispatchSemaphore(value: 0)
+            debugPrint(provider)
+            
+            if provider.canLoadObject(ofClass: NSURL.self) {
+                provider.loadObject(ofClass: NSURL.self) { (url, error) in
+                    defer {
+                        sema.signal()
+                    }
+                    
+                    guard error == nil else {
+                        print("Error loading item: \(error!)")
+                        return
+                    }
+                    
+                    guard let url = url as? URL else {
+                        return
+                    }
+                    
+                    url_ret = url
+                }
+                sema.wait()
+            }
+            return url_ret
+        }
+        
+        mutating func validateDrop(info: DropInfo) -> Bool {
+            if info.hasItemsConforming(to: [.gif]) {
+                return true
+            }
+            
+            guard let url = getURLFromInfo(info: info) else {
+                return false
+            }
+            
+            let fileType = url.pathExtension
+            
+            debugPrint("File type: \(fileType)")
+            let isGif = fileType == "gif"
+            if isGif {
+                changing_url = url
+            }
+            
+            return isGif
+        }
+        
+        func performDrop(info: DropInfo) -> Bool {
             return true
         }
-        
-        guard let url = getURLFromInfo(info: info) else {
-            return false
-        }
-        
-        let fileType = url.pathExtension
-        
-        debugPrint("File type: \(fileType)")
-        
-        return fileType == "gif"
-    }
-    
-    func performDrop(info: DropInfo) -> Bool {
-        return true
     }
 }
