@@ -309,26 +309,25 @@ struct EditButtonWithPopover<Content: View>: View {
 }
 
 struct Edit🐔View: View {
-    @State var item: ZhiyinEntity
+    @ObservedObject var item: ZhiyinEntity
     
-    private var name:  Binding<String> { Binding { return item.name!        } set: { item.name         = $0 }}
-    private var desc:  Binding<String> { Binding { return item.desc!        } set: { item.desc         = $0 }}
+    private var name:  Binding<String> { Binding { return item.name ?? ""   } set: { item.name         = $0 }}
+    private var desc:  Binding<String> { Binding { return item.desc ?? ""   } set: { item.desc         = $0 }}
     private var light: Binding<Bool>   { Binding { return item.light_invert } set: { item.light_invert = $0 }}
     private var dark:  Binding<Bool>   { Binding { return item.dark_invert  } set: { item.dark_invert  = $0 }}
     
-    @State private var isTargeted: Bool = false
+    @State private var isTargeted:  Bool = false
     @State private var needDeleted: Bool = false
-    @State private var isHover: Bool = false
+    @State private var isHover:     Bool = false
     
     @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
         Form {
             HStack {
-                
                 VStack {
                     Button {
-                        debugPrint("click ")
+                        debugPrint("🐔泥太美！")
                     } label: {
                         🐔View(entity: item, factor: 0.1).animation(.none)
                     }
@@ -341,7 +340,7 @@ struct Edit🐔View: View {
                         }.foregroundColor(.accentColor)
                     )
                     .frame(width: 128, height: 128)
-                    .modifier(GifDropModifier(🐔: $item))
+                    .modifier(GifDropModifier(🐔: item))
                     .onHover { hover in
                         isHover = hover
                     }

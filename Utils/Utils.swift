@@ -29,7 +29,7 @@ func friendLinks() -> [FriendLinkInfo]{
 }
 
 struct GifDropModifier: ViewModifier {
-    @Binding var 🐔: ZhiyinEntity
+    @ObservedObject var 🐔: ZhiyinEntity
     
     func body(content: Content) -> some View {
         content
