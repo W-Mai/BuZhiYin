@@ -68,7 +68,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusBarItem?.menu = menu
         statusBarItem?.button?.title = " "
         statusBarItem?.button?.addSubview(mainView)
-        statusBarItem?.button?.action = #selector(exitApp)
         
         if !LaunchAtLogin.isEnabled {
             openSettings()
