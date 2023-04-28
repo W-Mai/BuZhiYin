@@ -87,7 +87,7 @@ struct GifDropModifier: ViewModifier {
                 return false
             }
             
-            let fileType = url.pathExtension
+            let fileType = url.pathExtension.lowercased()
             
             debugPrint("File type: \(fileType)")
             let isGif = fileType == "gif"
