@@ -26,7 +26,7 @@ struct PersistenceController {
     static let preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-
+        
         do {
             try viewContext.save()
         } catch {
@@ -136,12 +136,12 @@ struct PersistenceController {
             }
             
             let _ = create🆕🐔(context: context,
-                                    data: (try? Data(contentsOf: url))!,
-                                    id: UUID(uuidString: conf.0)!,
-                                    name: conf.3,
-                                    desc: "不只因默认只因",
-                                    light_invert: conf.1,
-                                    dark_invert:  conf.2)
+                               data: (try? Data(contentsOf: url))!,
+                               id: UUID(uuidString: conf.0)!,
+                               name: conf.3,
+                               desc: "不只因默认只因",
+                               light_invert: conf.1,
+                               dark_invert:  conf.2)
             count += 1
         }
         
@@ -205,12 +205,12 @@ struct PersistenceController {
             fatalError("Lost Resources")
         }
         return create🆕🐔(context: context,
-                               data: (try? Data(contentsOf: url))!,
-                               id: UUID(),
-                               name: "只因",
-                               desc: "新只因",
-                               light_invert: false,
-                               dark_invert: true)
+                          data: (try? Data(contentsOf: url))!,
+                          id: UUID(),
+                          name: "只因",
+                          desc: "新只因",
+                          light_invert: false,
+                          dark_invert: true)
     }
     
     static func save(context: NSManagedObjectContext) -> Bool {
@@ -226,6 +226,7 @@ struct PersistenceController {
 
 extension ZhiyinEntity {
     static var defaultImage = #imageLiteral(resourceName: "ZhiyinDefault").cgImage(forProposedRect: nil, context: nil, hints: nil)!
+    static var imgCache = [ZhiyinEntity:[Int:CGImage]]()
     
     private func getImageOptions() -> NSDictionary {
         return [kCGImageSourceShouldCache as String: NSNumber(value: true),
@@ -262,14 +263,28 @@ extension ZhiyinEntity {
     
     func getImage(_ index: Int) -> CGImage {
         var index = index
-        if index >= self.frame_num || index < 0 {
-            index = 0
+        
+        if ZhiyinEntity.imgCache[self] == nil {
+            ZhiyinEntity.imgCache[self] = [Int:CGImage]()
         }
         
-        guard let img_src = getCGImageSource(self.img_data) else {
-            return ZhiyinEntity.defaultImage
+        var cache_list = ZhiyinEntity.imgCache[self]!
+        
+        if cache_list[index] == nil {
+            if index >= self.frame_num || index < 0 {
+                index = 0
+            }
+            
+            guard let img_src = getCGImageSource(self.img_data) else {
+                return ZhiyinEntity.defaultImage
+            }
+            
+            guard let img = CGImageSourceCreateImageAtIndex(img_src, index, getImageOptions()) else {
+                return ZhiyinEntity.defaultImage
+            }
+            ZhiyinEntity.imgCache[self]![index] = img
         }
         
-        return CGImageSourceCreateImageAtIndex(img_src, index, getImageOptions()) ?? ZhiyinEntity.defaultImage
+        return ZhiyinEntity.imgCache[self]![index]!
     }
 }
