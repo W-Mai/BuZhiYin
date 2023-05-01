@@ -226,7 +226,7 @@ struct PersistenceController {
 
 extension ZhiyinEntity {
     static var defaultImage = #imageLiteral(resourceName: "ZhiyinDefault").cgImage(forProposedRect: nil, context: nil, hints: nil)!
-    static var imgCache = [ZhiyinEntity:[Int:CGImage]]()
+    static var 🐔🎑💩 = 🐔💩<ZhiyinEntity, 🐔💩<Int, CGImage>>()
     
     private func getImageOptions() -> NSDictionary {
         return [kCGImageSourceShouldCache as String: NSNumber(value: true),
@@ -264,27 +264,23 @@ extension ZhiyinEntity {
     func getImage(_ index: Int) -> CGImage {
         var index = index
         
-        if ZhiyinEntity.imgCache[self] == nil {
-            ZhiyinEntity.imgCache[self] = [Int:CGImage]()
-        }
-        
-        var cache_list = ZhiyinEntity.imgCache[self]!
-        
-        if cache_list[index] == nil {
+        var failed = false
+        let img = ZhiyinEntity.🐔🎑💩.👈(self) { 🐔💩<Int, CGImage>() }.👈(index) {
             if index >= self.frame_num || index < 0 {
                 index = 0
             }
             
-            guard let img_src = getCGImageSource(self.img_data) else {
+            guard let img_src = self.getCGImageSource(self.img_data),
+                  let img = CGImageSourceCreateImageAtIndex(img_src, index, self.getImageOptions()) else {
+                failed = true
                 return ZhiyinEntity.defaultImage
             }
             
-            guard let img = CGImageSourceCreateImageAtIndex(img_src, index, getImageOptions()) else {
-                return ZhiyinEntity.defaultImage
-            }
-            ZhiyinEntity.imgCache[self]![index] = img
+            return img
         }
-        
-        return ZhiyinEntity.imgCache[self]![index]!
+        if failed {
+            ZhiyinEntity.🐔🎑💩.👈(self)?.🔄()
+        }
+        return img
     }
 }
