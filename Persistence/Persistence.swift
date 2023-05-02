@@ -271,12 +271,13 @@ extension ZhiyinEntity {
             }
             
             guard let img_src = self.getCGImageSource(self.img_data),
-                  let img = CGImageSourceCreateImageAtIndex(img_src, index, self.getImageOptions()) else {
+                  let img = CGImageSourceCreateImageAtIndex(img_src, index, self.getImageOptions()),
+                  let img_scaled = resizeImage(image: img, scale: 2 * iconMinWidth / CGFloat(img.width)) else {
                 failed = true
                 return ZhiyinEntity.defaultImage
             }
             
-            return img
+            return img_scaled
         }
         if failed {
             ZhiyinEntity.🐔🎑💩.👈(self)?.🔄()
