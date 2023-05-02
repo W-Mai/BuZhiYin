@@ -18,6 +18,7 @@
 		452292F429C8B10900B291DE /* my0.gif in Resources */ = {isa = PBXBuildFile; fileRef = 452292EB29C8B10900B291DE /* my0.gif */; };
 		452292F529C8B10900B291DE /* everonecat0.gif in Resources */ = {isa = PBXBuildFile; fileRef = 452292EC29C8B10900B291DE /* everonecat0.gif */; };
 		4530F018299E9D910056556E /* ZhiYins.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4530F016299E9D910056556E /* ZhiYins.xcdatamodeld */; };
+		454D58F429FE7C83006319A3 /* 🐔💩.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D58F329FE7C83006319A3 /* 🐔💩.swift */; };
 		4575AFB229D040FB001816D9 /* add_zhiyin.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4575AFB129D040FB001816D9 /* add_zhiyin.gif */; };
 		458BE93B299F4CB300CC2D4B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE93A299F4CB300CC2D4B /* Persistence.swift */; };
 		458BE94129A1101200CC2D4B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE94029A1101200CC2D4B /* Utils.swift */; };
@@ -49,6 +50,7 @@
 		452292EB29C8B10900B291DE /* my0.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = my0.gif; sourceTree = "<group>"; };
 		452292EC29C8B10900B291DE /* everonecat0.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = everonecat0.gif; sourceTree = "<group>"; };
 		4530F017299E9D910056556E /* ZhiYins.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ZhiYins.xcdatamodel; sourceTree = "<group>"; };
+		454D58F329FE7C83006319A3 /* 🐔💩.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🐔💩.swift"; sourceTree = "<group>"; };
 		4575AFB029CF5CFC001816D9 /* PRIVACY */ = {isa = PBXFileReference; lastKnownFileType = text; path = PRIVACY; sourceTree = "<group>"; };
 		4575AFB129D040FB001816D9 /* add_zhiyin.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = add_zhiyin.gif; sourceTree = "<group>"; };
 		4582822929BDFC2600AAFB7B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				458BE94029A1101200CC2D4B /* Utils.swift */,
+				454D58F329FE7C83006319A3 /* 🐔💩.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				45E8EA262974541E000D163E /* SettingsView.swift in Sources */,
 				4530F018299E9D910056556E /* ZhiYins.xcdatamodeld in Sources */,
 				458BE94129A1101200CC2D4B /* Utils.swift in Sources */,
+				454D58F429FE7C83006319A3 /* 🐔💩.swift in Sources */,
 				458BE93B299F4CB300CC2D4B /* Persistence.swift in Sources */,
 				D83C2A1A296C863500697CA3 /* CpuUsage.swift in Sources */,
 				D83C2A18296C860900697CA3 /* 🐔View.swift in Sources */,
@@ -429,7 +433,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 29;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"BuZhiYin/Preview Content\"";
 				DEVELOPMENT_TEAM = 3T73Y2T897;
@@ -464,7 +468,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 29;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"BuZhiYin/Preview Content\"";
 				DEVELOPMENT_TEAM = 3T73Y2T897;

@@ -129,3 +129,18 @@ struct GifDropModifier: ViewModifier {
         }
     }
 }
+
+func resizeImage(image: CGImage, scale: CGFloat) -> CGImage? {
+    let width = Int(CGFloat(image.width) * scale)
+    let height = Int(CGFloat(image.height) * scale)
+
+    let colorSpace = CGColorSpaceCreateDeviceRGB()
+    let bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
+
+    guard let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo) else { return nil }
+
+    context.interpolationQuality = .high
+    context.draw(image, in: CGRect(origin: .zero, size: CGSize(width: CGFloat(width), height: CGFloat(height))))
+
+    return context.makeImage()
+}
