@@ -258,6 +258,8 @@ extension ZhiyinEntity {
         
         self.frame_num = Int16(num)
         self.img_data = data
+        ZhiyinEntity.🐔🎑💩.👈(self)?.🔄()
+
         return true
     }
     

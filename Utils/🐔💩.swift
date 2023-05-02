@@ -26,6 +26,10 @@ class 🐔💩<🐔: Hashable, 💩> {
         return 💩
     }
     
+    func 🔄(_ 🐔: 🐔) {
+        💩🪣.removeValue(forKey: 🐔)
+    }
+    
     func 🔄() {
         💩🪣.removeAll()
     }
