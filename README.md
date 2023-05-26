@@ -49,6 +49,10 @@ QQ群：
 739654386
 ```
 
+## ✨
+
+[![Star History Chart](https://api.star-history.com/svg?repos=W-Mai/BuZhiYin&type=Date)](https://star-history.com/#W-Mai/BuZhiYin&Date)
+
 # 赞赏
 
 ### 如果给你带来快乐，小手阔绰，也请up喝一杯奶茶🥤吧！
