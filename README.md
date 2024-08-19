@@ -19,6 +19,7 @@
 
 <a href="https://apps.apple.com/app/apple-store/id6446803018?pt=126160538&ct=github&mt=8" target="_blank"> <img src="Snapshot/app-store-badge.png" alt="下载不只因" height="80"/> </a>
 
+### Bilibili 高燃剪辑：https://www.bilibili.com/video/BV1Kj411M7Yc/
 
 # 使用截图
 <br />
